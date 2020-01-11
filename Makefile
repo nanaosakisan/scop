@@ -10,43 +10,38 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf3d
+NAME = ft_scop
 
-SRC_PATH = src/
-SRC_NAME =	born_to_norm.c		\
-			check_map.c			\
-			draw.c				\
-			init_struct.c		\
-			input.c				\
-			key_hook.c			\
-			main.c				\
-			mini_map.c			\
-			raycasting_loop.c
+SRC_PATH = sources/
+SRC_NAME =	main.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 
 INCLUDE_PATH = includes/
-INCLUDE_NAME = wolf_3d.h
+INCLUDE_NAME = scop.h
 INCLUDE = $(addprefix $(INCLUDE_PATH), $(INCLUDE_NAME))
+
+LIB_PATH = ./lib
+
+LIBFT_PATH = $(LIB_PATH)/libft/
+
+GLFW_PATH = $(LIB_PATH)/glfw/src/
 
 OBJ_PATH = obj/
 OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.o))
 
-HEADER_PATH = minilibx_macos/
-HEADER_NAME = libmlx.a
-HEADER = $(addprefix $(HEADER_PATH), $(HEADER_NAME))
-
 FLAGS = -Wall -Werror -Wextra -g3
 # -fsanitize=address
-FLAGS_LIBX = -lmlx -framework OpenGL -framework AppKit -lpthread -D_REENTRANT
+LFLAGS = -L$(GLFW_PATH) -L$(LIBFT_PATH)
+FLAGS_LIB = -lft -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 .PHONY: all, build, creadir, clean, fclean, lib, re
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INCLUDE)
-	@make -C libft
-	@gcc $(FLAGS) $(FLAGS_LIBX) $(SRC) ./libft/libft.a $(HEADER) -o $(NAME)
+	@make -C lib/libft
+	@gcc $(FLAGS) $(LFLAGS) $(FLAGS_LIB) $(SRC) -o $(NAME)
 	@echo "\033[32mExe built\033[0m"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
@@ -54,16 +49,16 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@gcc $(FLAGS) -o $@ -c $<
 
 build :
-	@gcc $(FLAGS) $(FLAGS_LIBX) $(SRC) ./libft/libft.a $(HEADER) -o $(NAME)
+	@gcc $(FLAGS) $(LFLAGS) $(FLAGS_LIB) $(SRC) -o $(NAME)
 	@echo "\033[32mExe built\033[0m"
 
 clean:
-	@make clean -C libft
+	@make clean -C lib/libft
 	@rm -rf $(OBJ_PATH)
 	@echo "\033[31m.o cleaned\033[0m"
 
 fclean: clean
-	@make fclean -C libft
+	@make fclean -C lib/libft
 	@rm -f $(NAME)
 	@echo "\033[31mAll cleaned\033[0m"
 
