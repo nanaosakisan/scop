@@ -12,38 +12,44 @@
 
 #include "../includes/scop.h"
 
-int     main(void)
+void    error_callback(const char *description)
 {
-    GLFWwindow *window;
+    ft_putstr("Error: ");
+    ft_putendl(description);
+}
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(HEIGHT, WIDTH, "ft_scop", NULL, NULL);
-    if (!window)
+int     main(int ac, char **av)
+{
+    if (ac > 1 && av[0])
     {
+        GLFWwindow *window;
+
+        if (!glfwInit())
+        {
+            error_callback("Failed to initialize GLFW");
+            return -1;
+        }
+        window = glfwCreateWindow(HEIGHT, WIDTH, "ft_scop", NULL, NULL);
+        if (!window)
+        {
+            error_callback("Failed to open window");
+            glfwTerminate();
+            return -1;
+        }
+        glfwMakeContextCurrent(window);
+        glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+        while (!glfwWindowShouldClose(window) 
+            && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
+        {
+            first_draw();
+            /* Swap front and back buffers */
+            glfwSwapBuffers(window);
+
+            /* Poll for and process events */
+            glfwPollEvents();
+        }
+        glfwDestroyWindow(window);
         glfwTerminate();
-        return -1;
     }
-
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        // glClear(GL_COLOR_BUFFER_BIT);
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
     return (0);
 }
