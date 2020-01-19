@@ -38,15 +38,11 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 CFLAGS += -D LINUX `pkg-config --cflags glfw3` 
 FLAGS_LIB += `pkg-config --static --libs glfw3`
-# SPECIAL = lib/GLFW/deps/glad.c
 endif
 ifeq ($(UNAME_S),Darwin)
 CFLAGS += -D OSX
-FLAGS_LIB += -lft -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
-# SPECIAL = 
+FLAGS_LIB += -lft -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo 
 endif
-
-# `pkg-config --cflags glfw3` -o myprog myprog.c `pkg-config --static --libs glfw3`
 
 .PHONY: all, build, creadir, clean, fclean, re
 
