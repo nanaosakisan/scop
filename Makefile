@@ -33,9 +33,18 @@ OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.o))
 FLAGS = -Wall -Werror -Wextra -g3
 # -fsanitize=address
 LFLAGS = -L$(GLFW_PATH) -L$(LIBFT_PATH)
-FLAGS_LIB = -lft -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
-.PHONY: all, build, creadir, clean, fclean, lib, re
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+CFLAGS += -D LINUX `pkg-config --cflags glfw3` 
+FLAGS_LIB += `pkg-config --static --libs glfw3`
+endif
+ifeq ($(UNAME_S),Darwin)
+CFLAGS += -D OSX
+FLAGS_LIB += -lft -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo 
+endif
+
+.PHONY: all, build, creadir, clean, fclean, re
 
 all: $(NAME)
 
@@ -46,7 +55,7 @@ $(NAME): $(OBJ) $(INCLUDE)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	@gcc $(FLAGS) -o $@ -c $<
+	@gcc $(FLAGS) -o $@ -c $< $(CFLAGS)
 
 build :
 	@gcc $(FLAGS) $(LFLAGS) $(FLAGS_LIB) $(SRC) -o $(NAME)
