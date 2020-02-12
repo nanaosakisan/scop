@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/scop.h"
+#include "../includes/ft_scop.h"
 
 void    error_callback(const char *description)
 {
@@ -20,10 +20,10 @@ void    error_callback(const char *description)
 
 int     main(int ac, char **av)
 {
-    if (ac > 1 && av[0])
-    {
-        GLFWwindow *window;
+    GLFWwindow *window;
 
+    if (ac > 0 && av[0])
+    {
         if (!glfwInit())
         {
             error_callback("Failed to initialize GLFW");
@@ -41,7 +41,8 @@ int     main(int ac, char **av)
         while (!glfwWindowShouldClose(window) 
             && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
         {
-            first_draw();
+            // first_draw();
+
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
