@@ -3,72 +3,77 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/03/08 14:46:44 by iporsenn          #+#    #+#              #
-#    Updated: 2018/10/27 15:36:43 by iporsenn         ###   ########.fr        #
+#    Created: 2018/04/11 11:06:31 by hsabouri          #+#    #+#              #
+#    Updated: 2018/05/14 11:58:08 by hsabouri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_scop
+##change header
+NAME=ft_scop
 
-SRC_PATH = sources/
-SRC_NAME =	main.c
+LIBDIR=lib
 
-SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
+LIBFTDIR=$(LIBDIR)/libft
+LIBFTINC=$(LIBFTDIR)/includes
 
-INCLUDE_PATH = includes/
-INCLUDE_NAME = scop.h
-INCLUDE = $(addprefix $(INCLUDE_PATH), $(INCLUDE_NAME))
+LIBGLFWDIR=$(LIBDIR)/GLFW/src
+LIBGLFW=$(LIBDIR)/GLFW
+LIBGLFWINC=$(LIBDIR)/GLFW/include
 
-LIB_PATH = ./lib
+SRCNAM= main.c\
+		first_draw.c
 
-LIBFT_PATH = $(LIB_PATH)/libft/
+INCNAM= ft_scop.h\
 
-GLFW_PATH = $(LIB_PATH)/glfw/src/
+SRCDIR= sources
+INCDIR= includes
+OBJDIR= objs
 
-OBJ_PATH = obj/
-OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.o))
+SRC= $(SRCNAM:%=$(SRCDIR)/%)
+INC= $(INCNAM:%=$(INCDIR)/%)
+OBJ= $(SRCNAM:%.c=$(OBJDIR)/%.o)
 
-FLAGS = -Wall -Werror -Wextra -g3
-# -fsanitize=address
-LFLAGS = -L$(GLFW_PATH) -L$(LIBFT_PATH)
+CFLAGS = -Wall -Wextra -DNON_COMPLETE
+CC = clang
+#CFLAGS += -Werror
+CFLAGS += -g
+CFLAGS += -I$(LIBFTINC) -I$(LIBGLFWINC) -I$(INCDIR)
+LDFLAGS += -L$(LIBGLFWDIR)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-CFLAGS += -D LINUX `pkg-config --cflags glfw3` 
-FLAGS_LIB += `pkg-config --static --libs glfw3`
+CFLAGS += -D LINUX `pkg-config --cflags glfw3` -Ilib/GLFW/deps/ -Ilib/GLFW/include/ 
+LDFLAGS += `pkg-config --static --libs glfw3` -Ilib/GLFW/deps/ 
+SPECIAL = lib/GLFW/deps/glad.c
 endif
 ifeq ($(UNAME_S),Darwin)
 CFLAGS += -D OSX
-FLAGS_LIB += -lft -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo 
+LDFLAGS += -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+SPECIAL = 
 endif
 
-.PHONY: all, build, creadir, clean, fclean, re
+LDFLAGS += -L$(LIBFTDIR) -lft
 
-all: $(NAME)
+all: libs $(NAME)
 
-$(NAME): $(OBJ) $(INCLUDE)
-	@make -C lib/libft
-	@gcc $(FLAGS) $(LFLAGS) $(FLAGS_LIB) $(SRC) -o $(NAME)
-	@echo "\033[32mExe built\033[0m"
+$(NAME): $(OBJ)
+	$(CC) -o $@ $^ $(SPECIAL) $(LDFLAGS)
 
-$(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
-	@gcc $(FLAGS) -o $@ -c $< $(CFLAGS)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+	mkdir -p objs
+	$(CC) -o $@ -c $< $(CFLAGS)
 
-build :
-	@gcc $(FLAGS) $(LFLAGS) $(FLAGS_LIB) $(SRC) -o $(NAME)
-	@echo "\033[32mExe built\033[0m"
+libs:
+	$(MAKE) -s -C $(LIBFTDIR)
 
 clean:
-	@make clean -C lib/libft
-	@rm -rf $(OBJ_PATH)
-	@echo "\033[31m.o cleaned\033[0m"
+	$(MAKE) -C $(LIBFTDIR) clean
+	rm -rf $(OBJDIR)
 
 fclean: clean
-	@make fclean -C lib/libft
-	@rm -f $(NAME)
-	@echo "\033[31mAll cleaned\033[0m"
+	$(MAKE) -C $(LIBFTDIR) fclean
+	rm -rf $(NAME)
 
 re: fclean all
