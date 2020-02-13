@@ -39,6 +39,7 @@ int     main(int ac, char **av)
             return -1;
         }
         glfwMakeContextCurrent(window);
+        gladLoadGLLoader(glfwGetProcAddress);
         glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
         load_shaders();
 
@@ -64,19 +65,19 @@ int     main(int ac, char **av)
     //     glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
     //     glDisableVertexAttribArray(0);
 
-    //     // while (!glfwWindowShouldClose(window) 
-    //     //     && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-    //     // {
-    //     //     // first_draw();
+        while (!glfwWindowShouldClose(window) 
+            && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
+        {
+            // first_draw();
 
-    //     //     /* Swap front and back buffers */
-    //     //     glfwSwapBuffers(window);
+            /* Swap front and back buffers */
+            glfwSwapBuffers(window);
 
-    //     //     /* Poll for and process events */
-    //     //     glfwPollEvents();
-    //     // }
-    //     glfwDestroyWindow(window);
-    //     glfwTerminate();
+            /* Poll for and process events */
+            glfwPollEvents();
+        }
+        glfwDestroyWindow(window);
+        glfwTerminate();
     }
     return (0);
 }
