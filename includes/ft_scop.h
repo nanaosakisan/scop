@@ -13,10 +13,6 @@
 #ifndef FT_SCOP_H
 # define FT_SCOP_H
 
-# include <stdlib.h>
-# include <math.h>
-# include <libft.h>
-
 # ifdef __APPLE__
 #  include <OpenGL/gl3.h>
 #  define GLFW_INCLUDE_NONE
@@ -25,6 +21,13 @@
 # endif
 # include <GLFW/glfw3.h>
 
+# include <stdlib.h>
+# include <math.h>
+# include <libft.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
 // Remove at the end
 # include <stdio.h>
 
@@ -32,5 +35,7 @@
 # define WIDTH 480
 
 void    first_draw();
+void    load_shaders();
+void    error_callback(const char *description);
 
  #endif
