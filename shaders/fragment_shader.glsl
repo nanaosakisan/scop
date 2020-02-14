@@ -1,4 +1,5 @@
-#version 330 core
+#version 330ES core
+
 out vec4 FragColor;
 
 void main()

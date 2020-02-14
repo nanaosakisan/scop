@@ -1,80 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_shaders.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/14 15:31:54 by iporsenn          #+#    #+#             */
+/*   Updated: 2020/02/14 16:47:18 by iporsenn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/ft_scop.h"
 
-// GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path){
-void load_shaders()
+// GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path)
+void load_shaders(t_shader_type shader, char *filename)
 {
-
-	// Create the shaders
-	GLuint VertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	// GLuint FragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// Read the Vertex Shader code from the file
+	GLuint      shader_id;
+    GLint       compil_res;
+	GLsizei     logsize;
+    char        *log;
     int         fd;
     struct stat st;
-    char        *vertex_shader_source;
-    char        *fragment_shader_source;
+    char        *source;
     int         ret;
 
-    if ((fd = open("./shaders/vertex_shader.glsl", O_RDONLY)) == -1)
+    if ((fd = open(filename, O_RDONLY)) == -1)
         error_callback("cannot open vertex shader.");
-    stat("./shaders/vertex_shader.glsl" , &st);
-    vertex_shader_source = ft_strnew(st.st_size);
-    if ((ret = read(fd, vertex_shader_source, st.st_size)) == -1)
+    if (stat(filename , &st) == -1) 
+        error_callback("cannot read stat.");
+    if (!(source = ft_strnew(st.st_size)))
+        error_callback("source's malloc failed.");
+    if ((ret = read(fd, source, st.st_size)) == -1)
         error_callback("cannot read vertex shader.");
     close(fd);
-
-    if ((fd = open("./shaders/fragment_shader.glsl", O_RDONLY)) == -1)
-        error_callback("cannot open fragment shader.");
-    stat("./shaders/fragment_shader.glsl" , &st);
-    fragment_shader_source = ft_strnew(st.st_size);
-    if ((ret = read(fd, fragment_shader_source, st.st_size)) == -1)
-        error_callback("cannot read fragment shader.");
-    close(fd);
-
-    printf("vertex: %s\n", vertex_shader_source);
-    printf("fragment: %s\n", fragment_shader_source);
-
-	// GLint Result = GL_FALSE;
-	// int InfoLogLength;
-
-
-	// Compile Vertex Shader
-	// char const *VertexSourcePointer = vertex_shader_source;
-	// glShaderSource(VertexShaderID, 1, &VertexSourcePointer , NULL);
-	// glCompileShader(VertexShaderID);
+    // source[st.st_size] = '\0';
+    ft_putendl(source);
+    shader_id = 0;
+    if (shader == VERTEX)
+        shader_id = glCreateShader(GL_VERTEX_SHADER);
+    else if (shader == FRAGMENT)
+        shader_id = glCreateShader(GL_FRAGMENT_SHADER);
+    if (shader_id == 0)
+        error_callback("cannot create shader id.");
+	glShaderSource(shader_id, 1, (const GLchar *const *)&source , NULL);
+	glCompileShader(shader_id);
+    ft_strdel(&source);
 
 	// Check Vertex Shader
-	// glGetShaderiv(VertexShaderID, GL_COMPILE_STATUS, &Result);
-	// glGetShaderiv(VertexShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	// if (InfoLogLength > 0)
-	// 	error_callback("cannot compile vertex shader.");
-
-	// // Compile Fragment Shader
-	// printf("Compiling shader : %s\n", fragment_file_path);
-	// char const * FragmentSourcePointer = FragmentShaderCode.c_str();
-	// glShaderSource(FragmentShaderID, 1, &FragmentSourcePointer , NULL);
-	// glCompileShader(FragmentShaderID);
-
-	// // Check Fragment Shader
-	// glGetShaderiv(FragmentShaderID, GL_COMPILE_STATUS, &Result);
-	// glGetShaderiv(FragmentShaderID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	// if ( InfoLogLength > 0 ){
-	// 	std::vector<char> FragmentShaderErrorMessage(InfoLogLength+1);
-	// 	glGetShaderInfoLog(FragmentShaderID, InfoLogLength, NULL, &FragmentShaderErrorMessage[0]);
-	// 	printf("%s\n", &FragmentShaderErrorMessage[0]);
-	// }
-
-
+    compil_res = GL_FALSE;
+    glGetShaderiv(shader_id, GL_COMPILE_STATUS, &compil_res);
+    log = NULL;
+    log = 0;
+    if(compil_res != GL_TRUE)
+    {
+        glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &logsize);
+        if (!(log = ft_strnew(logsize)))
+        {
+            error_callback("log's malloc failed.");
+            glDeleteShader(shader_id);
+        }
+        glGetShaderInfoLog(shader_id, logsize, &logsize, log);
+        error_callback("cannot compile shader id");
+        error_callback(log);
+        ft_strdel(&log);
+        glDeleteShader(shader_id);
+    }
 
 	// // Link the program
 	// printf("Linking program\n");
 	// GLuint ProgramID = glCreateProgram();
-	// glAttachShader(ProgramID, VertexShaderID);
+	// glAttachShader(ProgramID, shader_id);
 	// glAttachShader(ProgramID, FragmentShaderID);
 	// glLinkProgram(ProgramID);
 
 	// // Check the program
-	// glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
+	// glGetProgramiv(ProgramID, GL_LINK_STATUS, &compil_res);
 	// glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
 	// if ( InfoLogLength > 0 ){
 	// 	std::vector<char> ProgramErrorMessage(InfoLogLength+1);
@@ -83,10 +83,10 @@ void load_shaders()
 	// }
 
 	
-	// glDetachShader(ProgramID, VertexShaderID);
+	// glDetachShader(ProgramID, shader_id);
 	// glDetachShader(ProgramID, FragmentShaderID);
 	
-	// glDeleteShader(VertexShaderID);
+	// glDeleteShader(shader_id);
 	// glDeleteShader(FragmentShaderID);
 
 	// return ProgramID;
