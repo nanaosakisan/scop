@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/14 17:02:51 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/17 14:33:06 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,15 @@ int     main(int ac, char **av)
 
     if (ac > 0 && av[0])
     {
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
         if (!glfwInit())
         {
             error_callback("Failed to initialize GLFW");
             return -1;
         }
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
         window = glfwCreateWindow(HEIGHT, WIDTH, "ft_scop", NULL, NULL);
         if (!window)
         {
@@ -46,36 +43,15 @@ int     main(int ac, char **av)
         glfwMakeContextCurrent(window);
         gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
         glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-        load_shaders(VERTEX, "./shaders/vertex_shader.glsl");
-        // load_shaders(FRAGMENT, "./shaders/fragment_shader.glsl");
+       	GLuint program_id = glCreateProgram();
+        program_id = load_shaders(program_id, GL_VERTEX_SHADER, "./shaders/vertex_shader.glsl");
+        program_id = load_shaders(program_id, GL_FRAGMENT_SHADER, "./shaders/fragment_shader.glsl");
 
-    //     // An array of 3 vectors which represents 3 vertices
-    //     static const GLfloat g_vertex_buffer_data[] = {
-    //     -1.0f, -1.0f, 0.0f,
-    //     1.0f, -1.0f, 0.0f,
-    //     0.0f,  1.0f, 0.0f,
-    //     };
-    //     // This will identify our vertex buffer
-    //     GLuint vertexbuffer;
-    //     // Generate 1 buffer, put the resulting identifier in vertexbuffer
-    //     glGenBuffers(1, &vertexbuffer);
-    //     // The following commands will talk about our 'vertexbuffer' buffer
-    //     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    //     // Give our vertices to OpenGL.
-    //     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
-
-    //     glEnableVertexAttribArray(0);
-    //     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-    //     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-    //     // Draw the triangle !
-    //     glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-    //     glDisableVertexAttribArray(0);
-
+        glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         while (!glfwWindowShouldClose(window) 
             && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
         {
-            // first_draw();
-
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 

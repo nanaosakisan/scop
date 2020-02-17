@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/14 15:32:04 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:31:37 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,8 @@
 # define HEIGHT 640
 # define WIDTH 480
 
-typedef enum    e_shader_type
-{
-    VERTEX,
-    FRAGMENT
-}               t_shader_type;
-
 void    first_draw();
-void    load_shaders(t_shader_type shader, char *filename);
+GLuint  load_shaders(GLuint program_id, GLenum shader, char *filename);
 void    error_callback(const char *description);
 
  #endif

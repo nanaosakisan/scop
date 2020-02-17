@@ -6,14 +6,13 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:31:54 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/14 16:47:18 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/17 13:47:08 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_scop.h"
 
-// GLuint LoadShaders(const char * vertex_file_path,const char * fragment_file_path)
-void load_shaders(t_shader_type shader, char *filename)
+GLuint load_shaders(GLuint program_id, GLenum shader, char *filename)
 {
 	GLuint      shader_id;
     GLint       compil_res;
@@ -33,20 +32,15 @@ void load_shaders(t_shader_type shader, char *filename)
     if ((ret = read(fd, source, st.st_size)) == -1)
         error_callback("cannot read vertex shader.");
     close(fd);
-    // source[st.st_size] = '\0';
-    ft_putendl(source);
     shader_id = 0;
-    if (shader == VERTEX)
-        shader_id = glCreateShader(GL_VERTEX_SHADER);
-    else if (shader == FRAGMENT)
-        shader_id = glCreateShader(GL_FRAGMENT_SHADER);
+    shader_id = glCreateShader(shader);
     if (shader_id == 0)
         error_callback("cannot create shader id.");
 	glShaderSource(shader_id, 1, (const GLchar *const *)&source , NULL);
 	glCompileShader(shader_id);
     ft_strdel(&source);
 
-	// Check Vertex Shader
+	// Check Shader
     compil_res = GL_FALSE;
     glGetShaderiv(shader_id, GL_COMPILE_STATUS, &compil_res);
     log = NULL;
@@ -67,27 +61,27 @@ void load_shaders(t_shader_type shader, char *filename)
     }
 
 	// // Link the program
-	// printf("Linking program\n");
-	// GLuint ProgramID = glCreateProgram();
-	// glAttachShader(ProgramID, shader_id);
-	// glAttachShader(ProgramID, FragmentShaderID);
-	// glLinkProgram(ProgramID);
+	glAttachShader(program_id, shader_id);
+	glLinkProgram(program_id);
 
-	// // Check the program
-	// glGetProgramiv(ProgramID, GL_LINK_STATUS, &compil_res);
-	// glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
-	// if ( InfoLogLength > 0 ){
-	// 	std::vector<char> ProgramErrorMessage(InfoLogLength+1);
-	// 	glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
-	// 	printf("%s\n", &ProgramErrorMessage[0]);
-	// }
-
+	// Check the program
+	glGetProgramiv(program_id, GL_LINK_STATUS, &compil_res);
+    if (compil_res != GL_TRUE)
+    {
+        glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &logsize);
+        if (!(log = ft_strnew(logsize)))
+        {
+            error_callback("log's malloc failed.");
+            glDeleteShader(shader_id);
+        }
+        glGetProgramInfoLog(program_id, logsize, NULL, log);
+        error_callback("cannot compile shader id");
+        error_callback(log);
+        ft_strdel(&log);
+        glDeleteShader(shader_id);
+    }
 	
-	// glDetachShader(ProgramID, shader_id);
-	// glDetachShader(ProgramID, FragmentShaderID);
-	
-	// glDeleteShader(shader_id);
-	// glDeleteShader(FragmentShaderID);
-
-	// return ProgramID;
+	glDetachShader(program_id, shader_id);
+	glDeleteShader(shader_id);
+	return program_id;
 }
