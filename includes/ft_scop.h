@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/17 13:31:37 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/18 11:12:21 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@
 # define HEIGHT 640
 # define WIDTH 480
 
-void    first_draw();
-GLuint  load_shaders(GLuint program_id, GLenum shader, char *filename);
-void    error_callback(const char *description);
+void        first_draw();
+GLFWwindow  *init();
+GLuint      load_shaders();
+void        error_callback(const char *description);
 
  #endif

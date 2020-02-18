@@ -10,6 +10,7 @@ LIB_GLFW = $(LIB_DIR)/GLFW
 LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
 SRC_NAME =	main.c			\
+			init.c			\
 			first_draw.c	\
 			load_shaders.c
 
