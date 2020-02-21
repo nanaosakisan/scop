@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/18 11:12:21 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/21 14:14:23 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,26 @@
 # define HEIGHT 640
 # define WIDTH 480
 
-void        first_draw();
-GLFWwindow  *init();
+typedef struct  s_env
+{
+    GLFWwindow  *window;
+    GLuint      program_id;
+}               t_env;
+
+typedef struct  s_obj
+{
+    GLuint      vbo;
+    GLuint      vao;
+    GLuint      ebo;
+    float       *vertices;
+    float       *indices;
+}               t_obj;
+
+
+void        first_draw(GLuint program_id, t_obj triangle);
+t_env       *init();
+t_obj       *init_triangle_obj();
 GLuint      load_shaders();
-void        error_callback(const char *description);
+void        error_callback(const char *error, const char *description);
 
  #endif
