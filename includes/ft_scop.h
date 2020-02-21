@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 14:14:23 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:38:47 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct  s_obj
 void        first_draw(GLuint program_id, t_obj triangle);
 t_env       *init();
 t_obj       *init_triangle_obj();
+t_obj       *init_triangle_obj2();
 GLuint      load_shaders();
 void        error_callback(const char *error, const char *description);
 
