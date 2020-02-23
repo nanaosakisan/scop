@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ../include/libft.h                                 :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:01:06 by iporsenn          #+#    #+#             */
-/*   Updated: 2017/11/22 16:01:07 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/21 17:50:04 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ typedef	struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_array
+{
+	size_t	len;
+	size_t	allocated;
+	size_t	elem_size;
+	void	*first;
+	void	*begin;
+}					t_array;
+
 
 int					error(char *str);
 int					ft_atoi(const char *str);
@@ -96,5 +106,14 @@ size_t				ft_tablen(char **tab);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					get_next_line(const int fd, char **line);
+
+t_array				anew(void *begin, int len, size_t size);
+t_array				apush(t_array array, void *elem);
+t_array				ainsert(t_array array, void *elem);
+void				anth(t_array array, int id);
+void				*pop(t_array array);
+void				*shift(t_array array);
+t_array				aforeach(t_array array, void (*f)(void *));
+t_array				aforeachi(t_array array, void (*f)(void *, size_t i));
 
 #endif
