@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 16:01:06 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 17:50:04 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/25 07:10:23 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct		s_array
 	size_t	allocated;
 	size_t	elem_size;
 	void	*first;
-	void	*begin;
+	void	*memory;
 }					t_array;
 
 
@@ -107,12 +107,12 @@ int					ft_toupper(int c);
 int					ft_tolower(int c);
 int					get_next_line(const int fd, char **line);
 
-t_array				anew(void *begin, int len, size_t size);
-t_array				apush(t_array array, void *elem);
-t_array				ainsert(t_array array, void *elem);
-void				anth(t_array array, int id);
-void				*pop(t_array array);
-void				*shift(t_array array);
+t_array				anew(void *first, size_t len, size_t elem_size);
+t_array				*apush(t_array *array, void *elem);
+t_array				*ainsert(t_array *array, void *elem);
+void				*anth(t_array *array, int id);
+void				*apop(t_array array);
+void				*ashift(t_array array);
 t_array				aforeach(t_array array, void (*f)(void *));
 t_array				aforeachi(t_array array, void (*f)(void *, size_t i));
 

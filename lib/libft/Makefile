@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 15:52:46 by iporsenn          #+#    #+#              #
-#    Updated: 2018/03/08 15:36:34 by iporsenn         ###   ########.fr        #
+#    Updated: 2020/02/25 07:10:14 by iporsenn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,11 @@ SRC_NAME =	error.c 					\
 			ft_tablen.c					\
 			ft_toupper.c				\
 			ft_tolower.c				\
-			get_next_line.c
+			get_next_line.c				\
+			anew.c						\
+			anth.c						\
+			apush.c						\
+			ainsert.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 
