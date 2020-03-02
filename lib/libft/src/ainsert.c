@@ -24,7 +24,7 @@ t_array     *ainsert(t_array *array, void *elem)
     after = (array->allocated - array->len) * array->elem_size - before;
     if (before >= array->elem_size)
     {
-        ft_memmove(array->first - array->elem_size, elem, 1);
+        ft_memmove(array->first - array->elem_size, elem, array->elem_size);
         array->first -= array->elem_size;
         array->len++;
     }
@@ -33,7 +33,7 @@ t_array     *ainsert(t_array *array, void *elem)
         ft_memmove(array->first + array->elem_size, array->first, array->len
             * array->elem_size);
         array->len++;
-        ft_memmove(array->first, elem, 1);
+        ft_memmove(array->first, elem, array->elem_size);
     }
     else
     {   
