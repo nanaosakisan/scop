@@ -77,7 +77,6 @@ int     test_ainsert()
     array = anew(test_after, 1, sizeof(int));
     array.allocated = 2;
     ainsert(&array, &push);
-    printf("test 0: %d, test 1: %d\n", *(int *)anth(&array, 0), *(int *)anth(&array, 1));
     if (*(int *)anth(&array, 0) != 1 || *(int *)anth(&array, 1) != 2)
         return (-1);
     clean_array(&array);
@@ -88,7 +87,6 @@ int     test_ainsert()
     array.allocated = 2;
     array.first += array.elem_size;
     ainsert(&array, &push);
-    printf("test 0: %d, test 1: %d\n", *(int *)anth(&array, 0), *(int *)anth(&array, 1));
     if (*(int *)anth(&array, 0) != 1 || *(int *)anth(&array, 1) != 2)
         return (-1);
     return (1);

@@ -21,7 +21,7 @@ t_array     *apush(t_array *array, void *elem)
     if (!array || !elem)
         return (NULL);
     before = array->first - array->memory;
-    after = (array->allocated - array->len) * array->elem_size - before ;
+    after = (array->allocated - array->len) * array->elem_size - before;
     if (after >= array->elem_size)
     {
         ft_memmove(array->first + array->len * array->elem_size, elem,

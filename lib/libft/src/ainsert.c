@@ -21,26 +21,19 @@ t_array     *ainsert(t_array *array, void *elem)
     if (!array || !elem)
         return (NULL);
     before = array->first - array->memory;
-    after = (array->allocated - array->len) * array->elem_size - before ;
-    printf("before: %ld, after: %ld, elem_size: %ld, len: %ld, allocated: %ld\n",
-        before, after, array->elem_size, array->len, array->allocated);
+    after = (array->allocated - array->len) * array->elem_size - before;
     if (before >= array->elem_size)
     {
-        printf("before\n");
-        ft_memmove(array->first - array->elem_size, elem, array->elem_size);
+        ft_memmove(array->first - array->elem_size, elem, 1);
         array->first -= array->elem_size;
         array->len++;
     }
     else if (after >= array->elem_size)
     {
-        printf("after\n");
         ft_memmove(array->first + array->elem_size, array->first, array->len
             * array->elem_size);
-        // array->first += array->elem_size;
-        // printf("buh: %d\n", *(int *)anth(array, 0));
-        ft_memmove(array->first, elem, array->elem_size);
-        // array->first -= array->elem_size;
         array->len++;
+        ft_memmove(array->first, elem, 1);
     }
     else
     {   
