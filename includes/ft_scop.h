@@ -14,12 +14,18 @@
 # define FT_SCOP_H
 
 # ifdef __APPLE__
+#  define GL_SILENCE_DEPRECATION
 #  include <OpenGL/gl3.h>
 #  define GLFW_INCLUDE_NONE
 # else
 #  include <glad/glad.h>
 # endif
 # include <GLFW/glfw3.h>
+
+# ifdef __APPLE__
+#  define GLADloadproc void*
+#  define gladLoadGLLoader(addr) (void)addr
+# endif
 
 # include <stdlib.h>
 # include <math.h>
