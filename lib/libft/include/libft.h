@@ -41,6 +41,7 @@ typedef struct		s_array
 
 
 int					error(char *str);
+double				ft_atof(const char *str);
 int					ft_atoi(const char *str);
 int					ft_between(int a, int b, int c);
 void				ft_bzero(void *s, size_t n);

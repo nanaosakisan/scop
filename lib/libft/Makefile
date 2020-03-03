@@ -14,6 +14,7 @@ NAME = libft.a
 
 SRC_PATH = src/
 SRC_NAME =	error.c 					\
+			ft_atof.c					\
 			ft_atoi.c					\
 			ft_between.c				\
 			ft_bzero.c					\

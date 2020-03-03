@@ -51,7 +51,7 @@ typedef struct  s_obj
     GLuint      vbo;
     GLuint      vao;
     GLuint      ebo;
-    t_array     vertice;
+    t_array     vertices;
     // float       *vertices;
     t_array     indices;
     // float       *indices;
