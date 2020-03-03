@@ -51,12 +51,14 @@ typedef struct  s_obj
     GLuint      vbo;
     GLuint      vao;
     GLuint      ebo;
-    float       *vertices;
-    float       *indices;
+    t_array     vertice;
+    // float       *vertices;
+    t_array     indices;
+    // float       *indices;
 }               t_obj;
 
-
-void        first_draw(GLuint program_id, t_obj triangle);
+t_obj		*parsing(char *path);
+void        draw(GLuint program_id, t_obj triangle);
 t_env       *init();
 t_obj       *init_triangle_obj();
 t_obj       *init_triangle_obj2();

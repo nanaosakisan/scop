@@ -23,8 +23,9 @@ LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
 SRC_NAME =	main.c			\
 			init.c			\
-			first_draw.c	\
-			load_shaders.c
+			draw.c			\
+			load_shaders.c	\
+			parsing.c
 
 INC_NAME = ft_scop.h	\
 

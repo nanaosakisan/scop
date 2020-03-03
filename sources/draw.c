@@ -12,7 +12,7 @@
 
 #include "../includes/ft_scop.h"
 
-void    first_draw(GLuint program_id, t_obj triangle)
+void    draw(GLuint program_id, t_obj triangle)
 {
     glUseProgram(program_id);
     glBindVertexArray(triangle.vao);

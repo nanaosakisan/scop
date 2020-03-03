@@ -12,3 +12,40 @@
 
 #include "../includes/ft_scop.h"
 
+t_obj		*parsing(char *path)
+{
+	t_obj	*obj;
+	int		ret;
+	int		fd;
+	char	*line;
+	char	**split;
+	int		i;
+
+	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
+	{
+		error_callback("PARSING", "object's malloc failed");
+		return (NULL);
+	}fd = 0;
+	fd = open(path, fd, O_RDONLY);
+	if (!fd)
+	{
+		error_callback("PARSING", "can't open file");
+		return (NULL);
+	}
+	ret = 0;
+	line = NULL;
+	while ((ret = get_next_line(fd, &line) != 0))
+	{
+		printf("line: %s\n", line);
+		split = ft_strsplit(line, ' ');
+		i = 0;
+		while (split[i] != NULL)
+		{
+			printf("word: %s\n", split[i]);
+			i++;
+		}
+		ft_strdel(&line);
+		// free(split);
+	}
+	return (obj);
+}

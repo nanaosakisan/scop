@@ -1,97 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplit2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/24 13:09:25 by iporsenn          #+#    #+#             */
-/*   Updated: 2017/11/24 13:09:27 by iporsenn         ###   ########.fr       */
+/*   Created: 2020/03/03 13:48:42 by iporsenn          #+#    #+#             */
+/*   Updated: 2020/03/03 13:48:44 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-#include <stdio.h>
 
-static	int			ft_count_word(const char *s, char c)
+static char	*replace_c(char *line, char c, int len)
 {
 	int i;
-	int cpt;
 
 	i = 0;
-	cpt = 0;
-	while (s[i])
+	while (i < len)
 	{
-		if (!s || !c)
-			return (0);
-		if (s[i] == c && !s[i - 1])
-			i++;
-		if ((s[i - 1] != c && s[i] == c) || (!s[i + 1] && s[i] != c))
-			cpt++;
+		if (line[i] == c)
+			line[i] = '\0';
 		i++;
 	}
-	return (cpt);
+	return (line);
 }
 
-static	char		**ft_malloc_array(const char *s, char c)
+static char	**fill_array(char **split, char *line, int len)
 {
-	char	**array;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < len)
+	{
+		if (line[i] != '\0' && (i == 0 || line[i - 1] == '\0'))
+		{
+			split[j] = line + i * sizeof(char);
+			j++;
+		}
+		i++;
+	}
+	return (split);
+}
+
+char		**ft_strsplit(const char *str, char c)
+{
+	char	*line;
+	char	**split;
+	int		len;
 	int		word;
 
-	array = NULL;
-	word = 0;
-	word = ft_count_word(s, c);
-	if (!(array = (char **)ft_memalloc(sizeof(char*) * word)))
+	if (!str || !c)
 		return (NULL);
-	array[word] = NULL;
-	return (array);
-}
-
-static	size_t		ft_count_letter(const char *s, int i, char c)
-{
-	size_t len;
-
-	len = 0;
-	if (s[i] == c)
-		i++;
-	while (s[i] != c && s[i])
-	{
-		len++;
-		i++;
-	}
-	return (len);
-}
-
-static	char		**ft_fill_array(char **array, const char *s, char c)
-{
-	int start;
-
-	start = 0;
-	while (s[start])
-	{
-		if ((s[start] != c && s[start - 1] == c)
-			|| (s[start] != c && start == 0))
-		{
-			*array = ft_strsub(s, (unsigned int)start,
-								ft_count_letter(s, start, c));
-			array++;
-			start = start + (int)ft_count_letter(s, start, c);
-		}
-		else
-			start++;
-	}
-	return (array);
-}
-
-char				**ft_strsplit(const char *s, char c)
-{
-	char	**array;
-
-	array = NULL;
-	if (!s || !c)
+	line = ft_strdup(str);
+	len = ft_strlen(line);
+	word = count_word(line, c);
+	line = replace_c(line, c, len);
+	if (!(split = (char **)malloc(word * sizeof(char *) + 1)))
 		return (NULL);
-	if (!(array = ft_malloc_array(s, c)))
-		return (NULL);
-	ft_fill_array(array, s, c);
-	return (array);
+	split[word] = NULL;
+	return (fill_array(split, line, len));
 }
