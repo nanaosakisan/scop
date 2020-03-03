@@ -38,13 +38,29 @@ t_obj		*parsing(char *path)
 	{
 		printf("line: %s\n", line);
 		split = ft_strsplit(line, ' ');
-		i = 0;
-		while (split[i] != NULL)
+		if (ft_strequ(split[0], "v") == 1)
 		{
-			printf("word: %s\n", split[i]);
+			i = 1;
+			obj->vertice = anew(NULL, 1, sizeof(float));
+			while (split[i])
+			{
+				//need atoi for float (atof) ?
+				apush(&obj->vertice, &split[i]);
+				i++;
+			}
+		}
+		i = 0;
+		while (i < (int)obj->vertice.len)
+		{
+			printf("vertex: %f\n", *(float *)anth(obj->vertice.first, i));
 			i++;
 		}
-		ft_strdel(&line);
+		// while (split[i] != NULL)
+		// {
+		// 	printf("word: %s\n", split[i]);
+		// 	i++;
+		// }
+		// ft_strdel(&line);
 		// free(split);
 	}
 	return (obj);
