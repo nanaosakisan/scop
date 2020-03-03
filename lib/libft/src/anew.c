@@ -14,20 +14,18 @@
 
 t_array		anew(void *first, size_t len, size_t elem_size)
 {
+	t_array	 array;
 
-    //first est tableau de 1 mais je met len = 2
-    t_array array;
-
-    if (first == NULL && len != 0)
-        array.memory = (void *)malloc(len * elem_size);
-    else
-        array.memory = first;
-    array.first = array.memory;
-    if (first == NULL)
-        array.len = 0;
-    else
-        array.len = len;
-    array.allocated = len;
-    array.elem_size = elem_size;
-    return (array);
+	if (first == NULL && len != 0)
+		array.memory = (void *)malloc(len * elem_size);
+	else
+		array.memory = first;
+	array.first = array.memory;
+	if (first == NULL)
+		array.len = 0;
+	else
+		array.len = len;
+	array.allocated = len;
+	array.elem_size = elem_size;
+	return (array);
 }

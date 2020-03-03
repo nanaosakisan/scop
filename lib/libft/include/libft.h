@@ -111,9 +111,7 @@ t_array				anew(void *first, size_t len, size_t elem_size);
 t_array				*apush(t_array *array, void *elem);
 t_array				*ainsert(t_array *array, void *elem);
 void				*anth(t_array *array, int id);
-void				*apop(t_array array);
-void				*ashift(t_array array);
-t_array				aforeach(t_array array, void (*f)(void *));
-t_array				aforeachi(t_array array, void (*f)(void *, size_t i));
+void				*apop(t_array *array);
+void				*ashift(t_array *array);
 
 #endif

@@ -81,7 +81,9 @@ SRC_NAME =	error.c 					\
 			anew.c						\
 			anth.c						\
 			apush.c						\
-			ainsert.c
+			ainsert.c					\
+			apop.c						\
+			ashift.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 
