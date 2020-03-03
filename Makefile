@@ -1,79 +1,68 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: hsabouri <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/04/11 11:06:31 by hsabouri          #+#    #+#              #
-#    Updated: 2018/05/14 11:58:08 by hsabouri         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = ft_scop
 
-##change header
-NAME=ft_scop
+LIB_DIR = lib
 
-LIBDIR=lib
+LIBFT_DIR = $(LIB_DIR)/libft
+LIBFT_INC = $(LIBFT_DIR)/include
 
-LIBFTDIR=$(LIBDIR)/libft
-LIBFTINC=$(LIBFTDIR)/includes
+LIBGLFW_DIR = $(LIB_DIR)/GLFW/src
+LIB_GLFW = $(LIB_DIR)/GLFW
+LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
-LIBGLFWDIR=$(LIBDIR)/GLFW/src
-LIBGLFW=$(LIBDIR)/GLFW
-LIBGLFWINC=$(LIBDIR)/GLFW/include
+SRC_NAME =	main.c			\
+			init.c			\
+			first_draw.c	\
+			load_shaders.c
 
-SRCNAM= main.c\
-		first_draw.c
+INC_NAME = ft_scop.h	\
 
-INCNAM= ft_scop.h\
+SRC_DIR = sources
+INC_DIR = includes
+OBJ_DIR = objs
 
-SRCDIR= sources
-INCDIR= includes
-OBJDIR= objs
+SRC = $(SRC_NAME:%=$(SRC_DIR)/%)
+INC = $(INC_NAME:%=$(INC_DIR)/%)
+OBJ = $(SRC_NAME:%.c=$(OBJ_DIR)/%.o)
 
-SRC= $(SRCNAM:%=$(SRCDIR)/%)
-INC= $(INCNAM:%=$(INCDIR)/%)
-OBJ= $(SRCNAM:%.c=$(OBJDIR)/%.o)
-
-CFLAGS = -Wall -Wextra -DNON_COMPLETE
+C_FLAGS = -Wall -Wextra -DNON_COMPLETE
 CC = clang
-#CFLAGS += -Werror
-CFLAGS += -g
-CFLAGS += -I$(LIBFTINC) -I$(LIBGLFWINC) -I$(INCDIR)
-LDFLAGS += -L$(LIBGLFWDIR)
+#C_FLAGS += -Werror
+C_FLAGS += -g
+C_FLAGS += -I$(LIBFT_INC) -I$(LIBGLFW_INC) -I$(INC_DIR)
+LD_FLAGS += -L$(LIBGLFW_DIR)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-CFLAGS += -D LINUX `pkg-config --cflags glfw3` -Ilib/GLFW/deps/ -Ilib/GLFW/include/ 
-LDFLAGS += `pkg-config --static --libs glfw3` -Ilib/GLFW/deps/ 
+C_FLAGS += -D LINUX `pkg-config --cflags glfw3` -Ilib/GLFW/deps/ -Ilib/GLFW/include/ 
+LD_FLAGS += `pkg-config --static --libs glfw3` -Ilib/GLFW/deps/ 
 SPECIAL = lib/GLFW/deps/glad.c
 endif
 ifeq ($(UNAME_S),Darwin)
-CFLAGS += -D OSX
-LDFLAGS += -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+C_FLAGS += -D OSX
+LD_FLAGS += -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 SPECIAL = 
 endif
 
-LDFLAGS += -L$(LIBFTDIR) -lft
+LD_FLAGS += -L$(LIBFT_DIR) -lft
 
 all: libs $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $^ $(SPECIAL) $(LDFLAGS)
+	$(CC) -o $@ $^ $(SPECIAL) $(LD_FLAGS)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INC)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC)
 	mkdir -p objs
-	$(CC) -o $@ -c $< $(CFLAGS)
+	$(CC) -o $@ -c $< $(C_FLAGS)
 
 libs:
-	$(MAKE) -s -C $(LIBFTDIR)
+	$(MAKE) -s -C $(LIBFT_DIR)
 
 clean:
-	$(MAKE) -C $(LIBFTDIR) clean
-	rm -rf $(OBJDIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(MAKE) -C $(LIBFTDIR) fclean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -rf $(NAME)
 
 re: fclean all

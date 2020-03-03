@@ -3,53 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2019/11/11 14:42:59 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:40:20 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_scop.h"
 
-void    error_callback(const char *description)
+void    error_callback(const char *error, const char *description)
 {
-    ft_putstr("Error: ");
+    ft_putstr(error);
+    ft_putstr(": ");
     ft_putendl(description);
 }
 
 int     main(int ac, char **av)
 {
-    GLFWwindow *window;
+    t_env   *env;
+    t_obj   *triangle;
+    t_obj   *triangle2;
 
     if (ac > 0 && av[0])
     {
-        if (!glfwInit())
+        env = init();
+        env->program_id = load_shaders();
+        triangle = init_triangle_obj();
+        triangle2 = init_triangle_obj2();
+        while (!glfwWindowShouldClose(env->window) 
+            && glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
         {
-            error_callback("Failed to initialize GLFW");
-            return -1;
-        }
-        window = glfwCreateWindow(HEIGHT, WIDTH, "ft_scop", NULL, NULL);
-        if (!window)
-        {
-            error_callback("Failed to open window");
-            glfwTerminate();
-            return -1;
-        }
-        glfwMakeContextCurrent(window);
-        glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-        while (!glfwWindowShouldClose(window) 
-            && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-        {
-            // first_draw();
-
+            glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            first_draw(env->program_id, *triangle);
+            first_draw(env->program_id, *triangle2);
             /* Swap front and back buffers */
-            glfwSwapBuffers(window);
+            glfwSwapBuffers(env->window);
 
             /* Poll for and process events */
             glfwPollEvents();
+     
         }
-        glfwDestroyWindow(window);
+
+        glDeleteVertexArrays(1, &triangle->vao);
+        glDeleteBuffers(1, &triangle->vbo);
+        glfwDestroyWindow(env->window);
+        free(env);
         glfwTerminate();
     }
     return (0);
