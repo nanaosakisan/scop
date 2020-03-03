@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/03/03 11:03:17 by iporsenn          #+#    #+#              #
+#    Updated: 2020/03/03 11:03:19 by iporsenn         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = ft_scop
 
 LIB_DIR = lib
@@ -33,14 +45,14 @@ LD_FLAGS += -L$(LIBGLFW_DIR)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-C_FLAGS += -D LINUX `pkg-config --cflags glfw3` -Ilib/GLFW/deps/ -Ilib/GLFW/include/ 
-LD_FLAGS += `pkg-config --static --libs glfw3` -Ilib/GLFW/deps/ 
+C_FLAGS += -D LINUX `pkg-config --cflags glfw3` -Ilib/GLFW/deps/ -Ilib/GLFW/include/
+LD_FLAGS += `pkg-config --static --libs glfw3` -Ilib/GLFW/deps/
 SPECIAL = lib/GLFW/deps/glad.c
 endif
 ifeq ($(UNAME_S),Darwin)
 C_FLAGS += -D OSX
 LD_FLAGS += -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
-SPECIAL = 
+SPECIAL =
 endif
 
 LD_FLAGS += -L$(LIBFT_DIR) -lft
