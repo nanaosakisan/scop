@@ -32,15 +32,15 @@ static t_array	parse_vertice(char **split, t_array vertices)
 
 static t_array	parse_indice(char **split, t_array indices)
 {
-	int		i;
-	float	push;
+	int	i;
+	int	push;
 
 	i = 1;
 	while (split[i])
 	{
 		if (split[i])
 		{
-			push = (float)ft_atof(split[i]);
+			push = ft_atoi(split[i]);
 			apush(&indices, &push);
 		}
 		i++;
@@ -87,7 +87,7 @@ t_obj			*parsing(char *path)
 		return (NULL);
 	}
 	obj->vertices = anew(NULL, 1, sizeof(float));
-	obj->indices = anew(NULL, 1, sizeof(float));
+	obj->indices = anew(NULL, 1, sizeof(int));
 	obj = read_file(fd, obj);
 	return (obj);
 }

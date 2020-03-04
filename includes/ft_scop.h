@@ -60,7 +60,7 @@ typedef struct  s_obj
 t_obj		*parsing(char *path);
 void        draw(GLuint program_id, t_obj triangle);
 t_env       *init();
-t_obj       *init_triangle_obj();
+t_obj       *init_triangle_obj(t_obj *obj);
 t_obj       *init_triangle_obj2();
 GLuint      load_shaders();
 void        error_callback(const char *error, const char *description);

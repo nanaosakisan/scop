@@ -12,11 +12,10 @@
 
 #include "../includes/ft_scop.h"
 
-void    draw(GLuint program_id, t_obj triangle)
+void	draw(GLuint program_id, t_obj triangle)
 {
-    glUseProgram(program_id);
-    glBindVertexArray(triangle.vao);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    // glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
-
+	glUseProgram(program_id);
+	glBindVertexArray(triangle.vao);
+	// glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
 }
