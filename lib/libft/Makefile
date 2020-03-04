@@ -95,7 +95,7 @@ INCLUDE = $(addprefix $(INCLUDE_PATH), $(INCLUDE_NAME))
 OBJ_PATH = obj/
 OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.o))
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 all: $(NAME)
 

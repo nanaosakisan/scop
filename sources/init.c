@@ -22,35 +22,6 @@ void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-// t_obj	*init_triangle_obj2()
-// {
-// 	t_obj	*obj;
-
-// 	if(!(obj = (t_obj*)malloc(sizeof(t_obj))))
-// 	{
-// 		error_callback("MALLOC", "objetc's malloc failed.");
-// 		return (NULL);
-// 	}
-// 	if (!(obj->vertices = (float *)malloc(9 * sizeof(float))))
-// 	{
-// 		error_callback("MALLOC", "vertice's malloca failed.");
-// 		return (NULL);
-// 	}
-// 	glGenBuffers(1, &obj->vbo);
-// 	glBindBuffer(GL_ARRAY_BUFFER, obj->vbo);
-// 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-// 	glGenVertexArrays(1, &obj->vao);
-// 	glBindVertexArray(obj->vao);
-
-// 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-// 	glEnableVertexAttribArray(0);
-
-// 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
-// 	glBindVertexArray(0);  
-// 	return (obj);
-// }
-
 t_obj	*init_triangle_obj(t_obj *obj)
 {
 
