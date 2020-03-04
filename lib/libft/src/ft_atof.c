@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/24 18:28:15 by iporsenn          #+#    #+#             */
-/*   Updated: 2017/11/24 18:28:16 by iporsenn         ###   ########.fr       */
+/*   Created: 2020/03/03 15:43:29 by iporsenn          #+#    #+#             */
+/*   Updated: 2020/03/03 15:43:31 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+double	ft_atof(const char *str)
 {
-	size_t i;
+	double	res;
+	double	dec;
+	int		neg;
+	char	**split;
 
-	i = 0;
-	if (!n)
-		return (dst);
-	while (i < n)
+	res = 0;
+	dec = 0;
+	neg = 1;
+	split = ft_strsplit(str, '.');
+	if (split[0])
 	{
-		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
-		i++;
+		if (ft_strchr(split[0], '-'))
+			neg = -1;
+		res = ft_atoi(split[0]);
 	}
-	((unsigned char *)dst)[i] = '\0';
-	return (dst);
+	if (split[1])
+	{
+		dec = (float)ft_atoi(split[1]);
+		while ((int)dec > 0)
+			dec = dec / 10;
+	}
+	res += dec;
+	res *= neg;
+	return (res);
 }

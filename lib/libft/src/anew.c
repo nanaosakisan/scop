@@ -14,7 +14,7 @@
 
 t_array		anew(void *first, size_t len, size_t elem_size)
 {
-	t_array	 array;
+	t_array	array;
 
 	if (first == NULL && len != 0)
 		array.memory = (void *)malloc(len * elem_size);
