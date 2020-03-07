@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:40:12 by iporsenn          #+#    #+#             */
-/*   Updated: 2018/10/02 13:44:42 by arusso           ###   ########.fr       */
+/*   Updated: 2020/03/07 15:40:01 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 char	*ft_strccut(char **src, char c)
 {

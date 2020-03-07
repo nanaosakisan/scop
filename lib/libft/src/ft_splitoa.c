@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitoa.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arusso <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 16:55:38 by arusso            #+#    #+#             */
-/*   Updated: 2018/10/01 17:36:12 by arusso           ###   ########.fr       */
+/*   Updated: 2020/03/07 15:40:01 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 int		*ft_splitoa(char *str, char c)
 {
