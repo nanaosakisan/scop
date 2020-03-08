@@ -6,7 +6,7 @@
 #    By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 15:52:46 by iporsenn          #+#    #+#              #
-#    Updated: 2020/02/25 07:10:14 by iporsenn         ###   ########.fr        #
+#    Updated: 2020/03/07 15:38:04 by iporsenn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,14 +88,14 @@ SRC_NAME =	error.c 					\
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 
-INCLUDE_PATH = ./
-INCLUDE_NAME =
+INCLUDE_PATH = ./include
+INCLUDE_NAME = libft.h
 INCLUDE = $(addprefix $(INCLUDE_PATH), $(INCLUDE_NAME))
 
 OBJ_PATH = obj/
 OBJ = $(addprefix $(OBJ_PATH), $(SRC_NAME:.c=.o))
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g -I$(INCLUDE_PATH)
 
 all: $(NAME)
 

@@ -6,11 +6,11 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 11:10:24 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/28 10:59:30 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/07 15:39:54 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include <libft.h>
 
 t_array		anew(void *first, size_t len, size_t elem_size)
 {

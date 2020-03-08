@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 15:38:47 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/07 17:39:18 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <libft.h>
+# include <libvec.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>

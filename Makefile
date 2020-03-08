@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 11:03:17 by iporsenn          #+#    #+#              #
-#    Updated: 2020/03/03 11:03:19 by iporsenn         ###   ########.fr        #
+#    Updated: 2020/03/07 17:46:41 by iporsenn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,11 @@ LIB_DIR = lib
 LIBFT_DIR = $(LIB_DIR)/libft
 LIBFT_INC = $(LIBFT_DIR)/include
 
-LIBGLFW_DIR = $(LIB_DIR)/GLFW/src
+LIBVEC_DIR = $(LIB_DIR)/libvec
+LIBVEC_INC = $(LIBVEC_DIR)/include
+
 LIB_GLFW = $(LIB_DIR)/GLFW
+LIBGLFW_DIR = $(LIB_GLFW)/src
 LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
 SRC_NAME =	main.c			\
@@ -41,7 +44,7 @@ C_FLAGS = -Wall -Wextra -DNON_COMPLETE
 CC = clang
 #C_FLAGS += -Werror
 C_FLAGS += -g
-C_FLAGS += -I$(LIBFT_INC) -I$(LIBGLFW_INC) -I$(INC_DIR)
+C_FLAGS += -I$(LIBFT_INC) -I$(LIBVEC_INC) -I$(LIBGLFW_INC) -I$(INC_DIR)
 LD_FLAGS += -L$(LIBGLFW_DIR)
 
 UNAME_S := $(shell uname -s)
@@ -56,7 +59,7 @@ LD_FLAGS += -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framewo
 SPECIAL =
 endif
 
-LD_FLAGS += -L$(LIBFT_DIR) -lft
+LD_FLAGS += -L$(LIBFT_DIR) -lft -L$(LIBVEC_DIR) -lvec
 
 all: libs $(NAME)
 
@@ -69,13 +72,16 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC)
 
 libs:
 	$(MAKE) -s -C $(LIBFT_DIR)
+	$(MAKE) -s -C $(LIBVEC_DIR)
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBVEC_DIR) clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIBVEC_DIR) fclean
 	rm -rf $(NAME)
 
 re: fclean all
