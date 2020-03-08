@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 17:39:18 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/08 13:39:00 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ typedef struct  s_obj
     GLuint      vao;
     GLuint      ebo;
     t_array     vertices;
-    // float       *vertices;
     t_array     indices;
-    // float       *indices;
 }               t_obj;
 
 t_obj		*parsing(char *path);

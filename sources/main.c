@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 17:47:34 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/08 15:34:12 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int     main(int ac, char **av)
 {
     t_env   *env;
     t_obj   *test;
-
+    
     if (ac == 2 && av[1])
     {
 
@@ -42,7 +42,6 @@ int     main(int ac, char **av)
 
             /* Poll for and process events */
             glfwPollEvents();
-     
         }
 
         glDeleteVertexArrays(1, &test->vao);

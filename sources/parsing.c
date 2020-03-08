@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:41:30 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 16:42:12 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/08 15:41:05 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,13 @@
 
 static t_array	parse_vertice(char **split, t_array vertices)
 {
-	int		i;
-	float	push;
+	t_vec4 vec;
 
-	i = 1;
-	while (split[i])
-	{
-		if (split[i])
-		{
-			push = (float)ft_atof(split[i]);
-			apush(&vertices, &push);
-		}
-		i++;
-	}
+	vec.x = (float)ft_atof(split[1]);
+	vec.y = (float)ft_atof(split[2]);
+	vec.z = (float)ft_atof(split[3]);
+	apush(&vertices, &vec);
+
 	return (vertices);
 }
 
@@ -69,6 +63,8 @@ static t_obj	*read_file(int fd, t_obj *obj)
 	return (obj);
 }
 
+
+
 t_obj			*parsing(char *path)
 {
 	t_obj	*obj;
@@ -86,7 +82,7 @@ t_obj			*parsing(char *path)
 		error_callback("PARSING", "can't open file");
 		return (NULL);
 	}
-	obj->vertices = anew(NULL, 1, sizeof(float));
+	obj->vertices = anew(NULL, 1, sizeof(t_vec3));
 	obj->indices = anew(NULL, 1, sizeof(int));
 	obj = read_file(fd, obj);
 	return (obj);

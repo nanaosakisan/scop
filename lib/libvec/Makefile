@@ -6,7 +6,7 @@
 #    By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/22 15:52:46 by iporsenn          #+#    #+#              #
-#    Updated: 2020/03/07 17:23:20 by iporsenn         ###   ########.fr        #
+#    Updated: 2020/03/08 15:37:08 by iporsenn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC_NAME =	vec_new.c		\
 			vec_dot_gem.c	\
 			vec_normalize.c	\
 			vec_cross.c		\
-			vec_scale.c
+			vec_scale.c		\
+			vec_conv.c
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 

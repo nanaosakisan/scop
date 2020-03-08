@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 15:07:01 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 17:24:05 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/08 15:39:05 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ float       vec4_dot_al(t_vec4 vec1, t_vec4 vec2);
 float       vec4_dot_gem(t_vec4 vec1, t_vec4 vec2, float angle);
 t_vec4      vec4_scale(t_vec4 vec, int scale);
 float       vec4_normalize(t_vec4);
+t_vec3      vec4_to_vec3(t_vec4 vec);
+t_vec2      vec4_to_vec2(t_vec4 vec);
 
 t_vec3      vec3_new(float x, float y, float z);
 t_vec3      vec3_add(t_vec3 vec1, t_vec3 vec2);
@@ -53,6 +55,7 @@ float       vec3_dot_gem(t_vec3 vec1, t_vec3 vec2, float angle);
 t_vec3      vec3_cross(t_vec3 vec1, t_vec3 vec2);
 t_vec3      vec3_scale(t_vec3 vec, int scale);
 float       vec3_normalize(t_vec3);
+t_vec2      vec3_to_vec2(t_vec3 vec);
 
 t_vec2      vec2_new(float u, float v);
 t_vec2      vec2_add(t_vec2 vec1, t_vec2 vec2);
