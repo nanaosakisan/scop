@@ -36,7 +36,7 @@ FLAGS = -Wall -Werror -Wextra -g -I$(INCLUDE_PATH)
 all: $(NAME)
 
 $(NAME):	creadir $(OBJ)
-	@echo "\033[32mLibft built\033[0m"
+	@echo "\033[32mLibvec built\033[0m"
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
@@ -51,6 +51,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[31mLibft cleaned\033[0m"
+	@echo "\033[31mLibvec cleaned\033[0m"
 
 re: fclean all
