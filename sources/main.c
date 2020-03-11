@@ -22,36 +22,35 @@ void	error_callback(const char *error, const char *description)
 int		main(int ac, char **av)
 {
 	t_env		*env;
-	t_obj		*test;
+	t_obj		*obj;
 	t_matrice	*matrice;
-	t_array res;
-	t_vec4	push;
+
 
 	if (ac == 2 && av[1])
 	{
 
-		test = parsing(av[1]);
+		obj = parsing(av[1]);
 		matrice = init_matrice();
-		res = anew(NULL, 1, sizeof(t_vec4));
-		free(test->vertices.memory);
-		test->vertices = res;
+		obj->vertices_final = anew(NULL, obj->vertices.len, sizeof(t_vec4));
+		obj->vertices_final = translation(obj->vertices, matrice->translation, obj->vertices_final);
 		env = init();
 		env->program_id = load_shaders();
-		test = init_triangle_obj(test);
+		obj = init_obj(obj);
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
+			matrice->translation = update_translation(matrice->translation);
 			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			draw(env->program_id, *test);
+			draw(env->program_id, *obj);
 			/* Swap front and back buffers */
 			glfwSwapBuffers(env->window);
 			/* Poll for and process events */
 			glfwPollEvents();
 		}
-		glDeleteVertexArrays(1, &test->vao);
-		glDeleteBuffers(1, &test->vbo);
-		glDeleteBuffers(1, &test->ebo);
+		glDeleteVertexArrays(1, &obj->vao);
+		glDeleteBuffers(1, &obj->vbo);
+		glDeleteBuffers(1, &obj->ebo);
 		glfwDestroyWindow(env->window);
 		free(env);
 		glfwTerminate();

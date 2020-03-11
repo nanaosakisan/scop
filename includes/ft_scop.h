@@ -41,10 +41,13 @@
 # define HEIGHT 640
 # define WIDTH 480
 
+# define N_KEY 284
+
 typedef struct	s_env
 {
 	GLFWwindow	*window;
 	GLuint		program_id;
+	u_int8_t	keys[N_KEY];
 }				t_env;
 
 typedef struct	s_obj
@@ -53,6 +56,7 @@ typedef struct	s_obj
 	GLuint	vao;
 	GLuint	ebo;
 	t_array	vertices;
+	t_array	vertices_final;
 	t_array	indices;
 }			t_obj;
 
@@ -84,12 +88,14 @@ typedef	struct	s_matrice
 t_obj			*parsing(char *path);
 void			draw(GLuint program_id, t_obj triangle);
 t_env			*init();
-t_obj			*init_triangle_obj(t_obj *obj);
-t_obj			*init_triangle_obj2();
+t_obj			*init_obj(t_obj *obj);
 GLuint			load_shaders();
 void			error_callback(const char *error, const char *description);
 
 t_matrice		*init_matrice();
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
+t_array			translation(t_array vertices, t_mat4 translation, t_array vertices_final);
+
+t_mat4			update_translation(t_mat4 translation);
 
 #endif

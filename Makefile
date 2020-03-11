@@ -24,12 +24,15 @@ LIB_GLFW = $(LIB_DIR)/GLFW
 LIBGLFW_DIR = $(LIB_GLFW)/src
 LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
-SRC_NAME =	main.c			\
-			init.c			\
-			draw.c			\
-			load_shaders.c	\
-			parsing.c		\
-			matrice_al.c
+SRC_NAME =	main.c				\
+			init.c				\
+			init_matrice.c		\
+			draw.c				\
+			load_shaders.c		\
+			parsing.c			\
+			matrice_al.c		\
+			transformation.c	\
+			event.c
 
 INC_NAME = ft_scop.h	\
 
