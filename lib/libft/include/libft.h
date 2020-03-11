@@ -39,7 +39,6 @@ typedef struct		s_array
 	void	*memory;
 }					t_array;
 
-
 int					error(char *str);
 double				ft_atof(const char *str);
 int					ft_atoi(const char *str);

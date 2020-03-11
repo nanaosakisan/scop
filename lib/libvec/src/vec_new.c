@@ -12,32 +12,32 @@
 
 #include <libvec.h>
 
-t_vec4  vec4_new(float x, float y, float z, float w)
+t_vec4	vec4_new(float x, float y, float z, float w)
 {
-    t_vec4 vec;
+	t_vec4 vec;
 
-    vec.x = x;
-    vec.y = y;
-    vec.z = z;
-    vec.w = w;
-    return(vec);
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	vec.w = w;
+	return (vec);
 }
 
-t_vec3  vec3_new(float x, float y, float z)
+t_vec3	vec3_new(float x, float y, float z)
 {
-    t_vec3 vec;
+	t_vec3 vec;
 
-    vec.x = x;
-    vec.y = y;
-    vec.z = z;
-    return(vec);
+	vec.x = x;
+	vec.y = y;
+	vec.z = z;
+	return (vec);
 }
 
-t_vec2  vec2_new(float u, float v)
+t_vec2	vec2_new(float u, float v)
 {
-    t_vec2 vec;
+	t_vec2 vec;
 
-    vec.u = u;
-    vec.v = v;
-    return(vec);
+	vec.u = u;
+	vec.v = v;
+	return (vec);
 }

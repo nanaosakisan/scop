@@ -12,17 +12,17 @@
 
 #include <libvec.h>
 
-inline float   vec4_normalize(t_vec4 vec)
+inline float	vec4_normalize(t_vec4 vec)
 {
-    return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
 
-inline float   vec3_normalize(t_vec3 vec)
+inline float	vec3_normalize(t_vec3 vec)
 {
-    return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
+	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
 
-inline float   vec2_normalize(t_vec2 vec)
+inline float	vec2_normalize(t_vec2 vec)
 {
-    return (sqrt(vec.u * vec.u + vec.v * vec.v));
+	return (sqrt(vec.u * vec.u + vec.v * vec.v));
 }
