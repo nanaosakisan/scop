@@ -15,17 +15,16 @@
 static t_array	parse_vertice(char **split, t_array vertices)
 {
 	int		i;
-	float	push;
+	t_vec4	push;
 
 	i = 1;
-	while (split[i])
+	if (split[i])
 	{
-		if (split[i])
-		{
-			push = (float)ft_atof(split[i]);
-			apush(&vertices, &push);
-		}
-		i++;
+		push.x = (float)ft_atof(split[1]);
+		push.y = (float)ft_atof(split[2]);
+		push.z = (float)ft_atof(split[3]);
+		push.w = 1;
+		apush(&vertices, &push);
 	}
 	return (vertices);
 }
@@ -86,7 +85,7 @@ t_obj			*parsing(char *path)
 		error_callback("PARSING", "can't open file");
 		return (NULL);
 	}
-	obj->vertices = anew(NULL, 1, sizeof(float));
+	obj->vertices = anew(NULL, 1, sizeof(t_vec4));
 	obj->indices = anew(NULL, 1, sizeof(int));
 	obj = read_file(fd, obj);
 	return (obj);

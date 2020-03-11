@@ -15,8 +15,9 @@
 
 void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
+	// make sure the viewport matches the new window dimensions; note that
+	// width and height will be significantly larger than specified on retina
+	// displays.
 	if (!window)
 		return ;
 	glViewport(0, 0, width, height);
@@ -29,19 +30,24 @@ t_obj	*init_triangle_obj(t_obj *obj)
 	int		*indices;
 
 	vert = (float *)obj->vertices.first;
+	printf("sizeof(vert): %lu, sizeof(len*elem_size): %lu\n",  sizeof(vert), obj->vertices.len * obj->vertices.elem_size);
 	indices = (int *)obj->indices.first;
 	glGenBuffers(1, &obj->vbo);
-	glGenBuffers(1, &obj->ebo);
+	if (obj->indices.len != 0)
+		glGenBuffers(1, &obj->ebo);
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vbo);
-	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices.len), vert, GL_STATIC_DRAW);
-
+	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices.len),
+		vert, GL_STATIC_DRAW);
 	glGenVertexArrays(1, &obj->vao);
 	glBindVertexArray(obj->vao);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (obj->indices.elem_size * obj->indices.len), indices, GL_STATIC_DRAW); 
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	if (obj->indices.len != 0)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ebo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, (obj->indices.elem_size
+			* obj->indices.len), indices, GL_STATIC_DRAW); 	
+	}
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
+		(void*)0);
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
