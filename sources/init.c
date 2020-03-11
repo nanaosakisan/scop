@@ -30,7 +30,6 @@ t_obj	*init_triangle_obj(t_obj *obj)
 	int		*indices;
 
 	vert = (float *)obj->vertices.first;
-	printf("sizeof(vert): %lu, sizeof(len*elem_size): %lu\n",  sizeof(vert), obj->vertices.len * obj->vertices.elem_size);
 	indices = (int *)obj->indices.first;
 	glGenBuffers(1, &obj->vbo);
 	if (obj->indices.len != 0)

@@ -17,7 +17,7 @@ void	draw(GLuint program_id, t_obj obj)
 	glUseProgram(program_id);
 	glBindVertexArray(obj.vao);
 	if (obj.indices.len == 0)
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, obj.vertices.len);
 	else
-		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, obj.indices.len, GL_UNSIGNED_INT, 0);
 }
