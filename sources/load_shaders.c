@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
 static int		check_shader_link(GLuint program_id, GLuint shader_id)
 {

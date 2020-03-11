@@ -10,49 +10,53 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
-void    error_callback(const char *error, const char *description)
+void	error_callback(const char *error, const char *description)
 {
-    ft_putstr(error);
-    ft_putstr(": ");
-    ft_putendl(description);
+	ft_putstr(error);
+	ft_putstr(": ");
+	ft_putendl(description);
 }
 
-int     main(int ac, char **av)
+int		main(int ac, char **av)
 {
-    t_env   *env;
-    t_obj   *test;
+	t_env		*env;
+	t_obj		*test;
+	t_matrice	*matrice;
+	t_array res;
+	t_vec4	push;
 
-    if (ac == 2 && av[1])
-    {
+	if (ac == 2 && av[1])
+	{
 
-        test = parsing(av[1]);
-        env = init();
-        env->program_id = load_shaders();
-        test = init_triangle_obj(test);
-        while (!glfwWindowShouldClose(env->window) 
-            && glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-        {
-            glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            draw(env->program_id, *test);
-            /* Swap front and back buffers */
-            glfwSwapBuffers(env->window);
-
-            /* Poll for and process events */
-            glfwPollEvents();
-     
-        }
-
-        glDeleteVertexArrays(1, &test->vao);
-        glDeleteBuffers(1, &test->vbo);
-        glDeleteBuffers(1, &test->ebo);
-        glfwDestroyWindow(env->window);
-        free(env);
-        glfwTerminate();
-    }
-    else
-        error_callback("Usage", "./ft_scope file.obj");
-    return (0);
+		test = parsing(av[1]);
+		matrice = init_matrice();
+		res = anew(NULL, 1, sizeof(t_vec4));
+		free(test->vertices.memory);
+		test->vertices = res;
+		env = init();
+		env->program_id = load_shaders();
+		test = init_triangle_obj(test);
+		while (!glfwWindowShouldClose(env->window) 
+			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
+		{
+			glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			draw(env->program_id, *test);
+			/* Swap front and back buffers */
+			glfwSwapBuffers(env->window);
+			/* Poll for and process events */
+			glfwPollEvents();
+		}
+		glDeleteVertexArrays(1, &test->vao);
+		glDeleteBuffers(1, &test->vbo);
+		glDeleteBuffers(1, &test->ebo);
+		glfwDestroyWindow(env->window);
+		free(env);
+		glfwTerminate();
+	}
+	else
+		error_callback("Usage", "./ft_scope file.obj");
+	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
 
 void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -21,6 +21,31 @@ void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	if (!window)
 		return ;
 	glViewport(0, 0, width, height);
+}
+
+t_matrice	*init_matrice()
+{
+	t_matrice	*matrice;
+
+	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
+		return (NULL);
+	matrice->translation.x1 = 1;
+	matrice->translation.y1 = 0;
+	matrice->translation.z1 = 0;
+	matrice->translation.w1 = 0;
+	matrice->translation.x2 = 0;
+	matrice->translation.y2 = 1;
+	matrice->translation.z2 = 0;
+	matrice->translation.w2 = 0;
+	matrice->translation.x3 = 0;
+	matrice->translation.y3 = 0;
+	matrice->translation.z3 = 1;
+	matrice->translation.w3 = 0;
+	matrice->translation.x4 = 0;
+	matrice->translation.y4 = 0;
+	matrice->translation.z4 = 0;
+	matrice->translation.w4 = 1;
+	return (matrice);
 }
 
 t_obj	*init_triangle_obj(t_obj *obj)
@@ -45,7 +70,7 @@ t_obj	*init_triangle_obj(t_obj *obj)
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, (obj->indices.elem_size
 			* obj->indices.len), indices, GL_STATIC_DRAW); 	
 	}
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
 		(void*)0);
 	glEnableVertexAttribArray(0);
 

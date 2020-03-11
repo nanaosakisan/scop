@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
 void	draw(GLuint program_id, t_obj obj)
 {

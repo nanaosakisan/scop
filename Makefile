@@ -28,7 +28,8 @@ SRC_NAME =	main.c			\
 			init.c			\
 			draw.c			\
 			load_shaders.c	\
-			parsing.c
+			parsing.c		\
+			matrice_al.c
 
 INC_NAME = ft_scop.h	\
 

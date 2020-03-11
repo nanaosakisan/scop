@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
 static t_array	parse_vertice(char **split, t_array vertices)
 {

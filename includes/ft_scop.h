@@ -41,29 +41,55 @@
 # define HEIGHT 640
 # define WIDTH 480
 
-typedef struct  s_env
+typedef struct	s_env
 {
-    GLFWwindow  *window;
-    GLuint      program_id;
-}               t_env;
+	GLFWwindow	*window;
+	GLuint		program_id;
+}				t_env;
 
-typedef struct  s_obj
+typedef struct	s_obj
 {
-    GLuint      vbo;
-    GLuint      vao;
-    GLuint      ebo;
-    t_array     vertices;
-    // float       *vertices;
-    t_array     indices;
-    // float       *indices;
-}               t_obj;
+	GLuint	vbo;
+	GLuint	vao;
+	GLuint	ebo;
+	t_array	vertices;
+	t_array	indices;
+}			t_obj;
 
-t_obj		*parsing(char *path);
-void        draw(GLuint program_id, t_obj triangle);
-t_env       *init();
-t_obj       *init_triangle_obj(t_obj *obj);
-t_obj       *init_triangle_obj2();
-GLuint      load_shaders();
-void        error_callback(const char *error, const char *description);
+typedef	struct	s_mat4
+{
+	GLfloat	x1;
+	GLfloat	y1;
+	GLfloat	z1;
+	GLfloat	w1;
+	GLfloat	x2;
+	GLfloat	y2;
+	GLfloat	z2;
+	GLfloat	w2;
+	GLfloat	x3;
+	GLfloat	y3;
+	GLfloat	z3;
+	GLfloat	w3;
+	GLfloat	x4;
+	GLfloat	y4;
+	GLfloat	z4;
+	GLfloat	w4;
+}				t_mat4;
 
- #endif
+typedef	struct	s_matrice
+{
+	t_mat4	translation;
+}				t_matrice;
+
+t_obj			*parsing(char *path);
+void			draw(GLuint program_id, t_obj triangle);
+t_env			*init();
+t_obj			*init_triangle_obj(t_obj *obj);
+t_obj			*init_triangle_obj2();
+GLuint			load_shaders();
+void			error_callback(const char *error, const char *description);
+
+t_matrice		*init_matrice();
+t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
+
+#endif
