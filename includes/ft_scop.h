@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 17:39:18 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/15 12:36:47 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ t_matrice		*init_matrice();
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_array			translation(t_array vertices, t_mat4 translation, t_array vertices_final);
 
-t_mat4			update_translation(t_mat4 translation);
+t_mat4			update_translation(t_mat4 translation, t_env env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 15:43:29 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 15:40:01 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/15 12:57:45 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ double	ft_atof(const char *str)
 	split = ft_strsplit(str, '.');
 	if (split[0])
 	{
-		if (ft_strchr(split[0], '-'))
-			neg = -1;
 		res = ft_atoi(split[0]);
+		if (ft_strchr(split[0], '-') && (res > -1 && res < 1))
+			neg = -1;
 	}
 	if (split[1])
 	{
