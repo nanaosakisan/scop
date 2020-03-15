@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/15 12:36:47 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/15 13:08:10 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef	struct	s_matrice
 }				t_matrice;
 
 t_obj			*parsing(char *path);
-void			draw(GLuint program_id, t_obj triangle);
+void			draw(t_env env, t_obj triangle);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
 GLuint			load_shaders();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrice_al.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 13:57:43 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/11 13:57:45 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/15 13:13:30 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vec4		mat_vec(t_mat4 mat, t_vec4 vec)
 	return (res);
 }
 
-// t_mat4		mat_mat()
+// t_mat4		mat_mat(t_mat4 mat1, t_mat4 mat2)
 // {
 
 // }
