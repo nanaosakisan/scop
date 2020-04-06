@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/06 17:00:42 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/06 17:06:28 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(int ac, char **av)
 
 		obj = parsing(av[1]);
 		matrice = init_matrice();
-		obj->vertices_final = transformation(*obj, *matrice);
+		obj->vertices_final = transformation(obj->vertices, *matrice);
 		env = init();
 		env->program_id = load_shaders();
 		obj = init_obj(obj);
