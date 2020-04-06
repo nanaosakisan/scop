@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/15 13:08:10 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/18 12:41:44 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef	struct	s_mat4
 typedef	struct	s_matrice
 {
 	t_mat4	translation;
+	t_mat4	identity;
+	t_mat4	scale;
 }				t_matrice;
 
 t_obj			*parsing(char *path);
@@ -94,7 +96,7 @@ void			error_callback(const char *error, const char *description);
 
 t_matrice		*init_matrice();
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
-t_array			translation(t_array vertices, t_mat4 translation, t_array vertices_final);
+t_array			transformation(t_obj obj, t_matrice matrice);
 
 t_mat4			update_translation(t_mat4 translation, t_env env);
 

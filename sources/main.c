@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/15 13:36:30 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/06 17:00:42 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ int		main(int ac, char **av)
 
 		obj = parsing(av[1]);
 		matrice = init_matrice();
-		obj->vertices_final = anew(NULL, 1, sizeof(t_vec4));
-		obj->vertices_final = translation(obj->vertices, matrice->translation,\
-			obj->vertices_final);
+		obj->vertices_final = transformation(*obj, *matrice);
 		env = init();
 		env->program_id = load_shaders();
 		obj = init_obj(obj);
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
-			matrice->translation = update_translation(matrice->translation,
-				*env);
-			obj->vertices_final = translation(obj->vertices,\
-				matrice->translation, obj->vertices_final);
+			// matrice->translation = update_translation(matrice->translation,
+			// 	*env);
+			// obj->vertices_final = transformation(*obj, *matrice);
+			// for (int i = 0; i < obj->vertices.len; i++)
+			// 	printf("vec.x: %f, vec.y: %f\n", (*(t_vec4*)anth(&obj->vertices_final,\
+			// 		i)).x, (*(t_vec4*)anth(&obj->vertices_final, i)).y);
 			draw(*env, *obj);
 		}
 		clean(env, obj, matrice);
@@ -70,5 +70,5 @@ int		main(int ac, char **av)
 }
 
 // for (int i = 0; i < obj->vertices.len; i++)
-// 	printf("vec.x: %f, vec.y: %f\n", (*(t_vec4*)anth(&obj->vertices_final,\
-// 		i)).x, (*(t_vec4*)anth(&obj->vertices_final, i)).y);
+// 			printf("vec.x: %f, vec.y: %f\n", (*(t_vec4*)anth(&obj->vertices_final,\
+// 				i)).x, (*(t_vec4*)anth(&obj->vertices_final, i)).y);

@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 15:38:39 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/03/18 12:03:00 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ t_obj	*init_obj(t_obj *obj)
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
-	glBindVertexArray(0);  
+	glBindVertexArray(0);
+		glBindVertexArray(obj->vao);
 	return (obj);
 }
 
