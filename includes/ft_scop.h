@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/06 17:06:13 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/07 15:28:20 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ typedef struct	s_env
 {
 	GLFWwindow	*window;
 	GLuint		program_id;
+	GLuint		model_id;
+	GLuint		view_id;
+	GLuint		projection_id;
 	u_int8_t	keys[N_KEY];
 }				t_env;
 
@@ -85,16 +88,21 @@ typedef	struct	s_matrice
 	t_mat4	translation;
 	t_mat4	identity;
 	t_mat4	scale;
+	t_mat4	model;
+	t_mat4	view;
+	t_mat4	projection;
 }				t_matrice;
 
+void			get_error();
 t_obj			*parsing(char *path);
-void			draw(t_env env, t_obj triangle);
+void			draw(t_env env, t_obj triangle, t_matrice matrice);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
 GLuint			load_shaders();
 void			error_callback(const char *error, const char *description);
 
 t_matrice		*init_matrice();
+void			init_mvp(t_env env, t_matrice matrice);
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_array			transformation(t_array vertices, t_matrice matrice);
 
