@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:41:30 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 17:08:17 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/08 17:13:23 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ t_obj			*parsing(char *path)
 	obj->vertices = anew(NULL, 1, sizeof(t_vec4));
 	obj->indices = anew(NULL, 1, sizeof(int));
 	obj = read_file(fd, obj);
-	obj->vertices_final = triangulate(obj->vertices, obj->indices);
+	if (obj->indices.len != 0)
+		obj->vertices_final = triangulate(obj->vertices, obj->indices);
+	else
+		obj->vertices_final = obj->vertices;
 	return (obj);
 }

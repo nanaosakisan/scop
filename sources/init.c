@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 17:07:44 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/08 17:09:55 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ t_obj	*init_obj(t_obj *obj)
 {
 
 	float	*vert;
-	int		*indices;
 
 	vert = (float *)obj->vertices_final.first;
-	indices = (int *)obj->indices.first;
 	glGenBuffers(1, &obj->vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vbo);
 	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices_final.len),
@@ -42,7 +40,7 @@ t_obj	*init_obj(t_obj *obj)
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0);
-		glBindVertexArray(obj->vao);
+	glBindVertexArray(obj->vao);
 	return (obj);
 }
 
