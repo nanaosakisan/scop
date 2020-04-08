@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:41:30 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 16:42:12 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/08 17:08:17 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,23 @@ static t_obj	*read_file(int fd, t_obj *obj)
 	return (obj);
 }
 
+t_array			triangulate(t_array vertices, t_array indices)
+{
+	int 	i;
+	t_array	vertices_final;
+	t_vec4	push;
+
+	i = 0;
+	vertices_final = anew(NULL, 1, sizeof(t_vec4));
+	while ((size_t)i < indices.len)
+	{
+		push = *(t_vec4*)anth(&vertices, *(int*)anth(&indices, i));
+		apush(&vertices_final, &push);
+		i++;
+	}
+	return (vertices_final);
+}
+
 t_obj			*parsing(char *path)
 {
 	t_obj	*obj;
@@ -88,5 +105,6 @@ t_obj			*parsing(char *path)
 	obj->vertices = anew(NULL, 1, sizeof(t_vec4));
 	obj->indices = anew(NULL, 1, sizeof(int));
 	obj = read_file(fd, obj);
+	obj->vertices_final = triangulate(obj->vertices, obj->indices);
 	return (obj);
 }
