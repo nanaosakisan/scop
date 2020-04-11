@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 16:35:45 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/11 19:02:20 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef	struct	s_matrice
 
 void			get_error();
 t_obj			*parsing(char *path);
+t_array			vertice_to_final(t_array vertices, t_array indices);
 void			draw(t_env env, t_obj triangle, t_matrice matrice);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
