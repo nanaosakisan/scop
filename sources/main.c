@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 16:41:42 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/11 14:06:22 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int		main(int ac, char **av)
 
 	if (ac == 2 && av[1])
 	{
-
 		obj = parsing(av[1]);
 		matrice = init_matrice();
 		obj->vertices_final = transformation(obj->vertices_final, *matrice);

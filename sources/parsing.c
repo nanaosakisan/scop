@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:41:30 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 17:13:23 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/11 14:05:55 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ t_array			triangulate(t_array vertices, t_array indices)
 	vertices_final = anew(NULL, 1, sizeof(t_vec4));
 	while ((size_t)i < indices.len)
 	{
-		push = *(t_vec4*)anth(&vertices, *(int*)anth(&indices, i));
+		printf("indice: %d\n", *(int*)anth(&indices, i));
+		push = *(t_vec4*)anth(&vertices, (*(int*)anth(&indices, i)) - 1);
+		printf("push.c: %f, push.y: %f, push.z = %f\n", push.x, push.y, push.z);
 		apush(&vertices_final, &push);
 		i++;
 	}
