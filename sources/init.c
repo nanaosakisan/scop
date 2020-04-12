@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 17:09:55 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/12 17:52:10 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@ t_env	*init()
 	glfwSetFramebufferSizeCallback(env->window, framebuffer_size_callback);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
+	env->angle_x = 0;
+	env->angle_y = 0;
+	env->angle_z = 0;
 	return (env);
 }

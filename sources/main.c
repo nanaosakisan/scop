@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/11 14:06:22 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/12 17:53:17 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int		main(int ac, char **av)
 
 	if (ac == 2 && av[1])
 	{
-		obj = parsing(av[1]);
-		matrice = init_matrice();
-		obj->vertices_final = transformation(obj->vertices_final, *matrice);
 		env = init();
+		obj = parsing(av[1]);
+		matrice = init_matrice(*env);
+		obj->vertices_final = transformation(obj->vertices_final, *matrice);
 		env->program_id = load_shaders();
 		env->model_id = glGetUniformLocation(env->program_id, "model");
 		env->view_id = glGetUniformLocation(env->program_id, "view");
@@ -69,9 +69,9 @@ int		main(int ac, char **av)
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
 			// update position et zoom;
-			// matrice->translation = update_translation(matrice->translation,
-			// 	*env);
-			// obj->vertices_final = transformation(*obj, *matrice);
+			matrice->translation = update_translation(matrice->translation,
+				*env);
+			obj->vertices_final = transformation(obj->vertices_final, *matrice);
 			draw(*env, *obj, *matrice);
 		}
 		clean(env, obj, matrice);

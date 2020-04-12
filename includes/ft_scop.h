@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/11 19:02:20 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/12 17:49:35 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ typedef struct	s_env
 	GLuint		view_id;
 	GLuint		projection_id;
 	u_int8_t	keys[N_KEY];
+	int			angle_x;
+	int			angle_y;
+	int			angle_z;
 }				t_env;
 
 typedef struct	s_obj
@@ -87,6 +90,9 @@ typedef	struct	s_matrice
 {
 	t_mat4	translation;
 	t_mat4	identity;
+	t_mat4	rot_x;
+	t_mat4	rot_y;
+	t_mat4	rot_z;
 	t_mat4	scale;
 	t_mat4	model;
 	t_mat4	view;
@@ -102,7 +108,7 @@ t_obj			*init_obj(t_obj *obj);
 GLuint			load_shaders();
 void			error_callback(const char *error, const char *description);
 
-t_matrice		*init_matrice();
+t_matrice		*init_matrice(t_env env);
 void			init_mvp(t_env env, t_matrice matrice);
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_array			transformation(t_array vertices_final, t_matrice matrice);
