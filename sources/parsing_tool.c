@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   parsing_tool.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/11 17:47:29 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/08 17:08:03 by iporsenn         ###   ########.fr       */
+/*   Created: 2020/04/11 19:01:44 by iporsenn          #+#    #+#             */
+/*   Updated: 2020/04/11 19:02:09 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_scop.h>
 
-void	draw(t_env env, t_obj obj, t_matrice matrice)
+t_array vertice_to_final(t_array vertices, t_array indices)
 {
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(env.program_id);	
-	init_mvp(env, matrice);
-	glDrawArrays(GL_TRIANGLES, 0, obj.vertices_final.len);
-	glfwSwapBuffers(env.window);
-	glfwPollEvents();
+	int 	i;
+	t_array	vertices_final;
+	t_vec4	push;
+
+	i = 0;
+	vertices_final = anew(NULL, 1, sizeof(t_vec4));
+	while ((size_t)i < indices.len)
+	{
+		push = *(t_vec4*)anth(&vertices, (*(int*)anth(&indices, i)) - 1);
+		apush(&vertices_final, &push);
+		i++;
+	}
+	return (vertices_final);
 }

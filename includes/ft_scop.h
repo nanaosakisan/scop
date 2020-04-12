@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/07 15:28:20 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/11 19:02:20 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef	struct	s_matrice
 
 void			get_error();
 t_obj			*parsing(char *path);
+t_array			vertice_to_final(t_array vertices, t_array indices);
 void			draw(t_env env, t_obj triangle, t_matrice matrice);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
@@ -104,7 +105,7 @@ void			error_callback(const char *error, const char *description);
 t_matrice		*init_matrice();
 void			init_mvp(t_env env, t_matrice matrice);
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
-t_array			transformation(t_array vertices, t_matrice matrice);
+t_array			transformation(t_array vertices_final, t_matrice matrice);
 
 t_mat4			update_translation(t_mat4 translation, t_env env);
 

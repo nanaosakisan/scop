@@ -6,7 +6,7 @@
 #    By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 11:03:17 by iporsenn          #+#    #+#              #
-#    Updated: 2020/03/07 17:46:41 by iporsenn         ###   ########.fr        #
+#    Updated: 2020/04/11 19:02:46 by iporsenn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_NAME =	main.c				\
 			draw.c				\
 			load_shaders.c		\
 			parsing.c			\
+			parsing_tool.c		\
 			matrice_al.c		\
 			transformation.c	\
 			event.c

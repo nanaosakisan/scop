@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/07 15:30:43 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/08 17:09:55 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,20 @@ t_obj	*init_obj(t_obj *obj)
 {
 
 	float	*vert;
-	int		*indices;
 
 	vert = (float *)obj->vertices_final.first;
-	indices = (int *)obj->indices.first;
 	glGenBuffers(1, &obj->vbo);
-	if (obj->indices.len != 0)
-		glGenBuffers(1, &obj->ebo);
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vbo);
-	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices.len),
+	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices_final.len),
 		vert, GL_STATIC_DRAW);
 	glGenVertexArrays(1, &obj->vao);
 	glBindVertexArray(obj->vao);
-	if (obj->indices.len != 0)
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ebo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, (obj->indices.elem_size
-			* obj->indices.len), indices, GL_STATIC_DRAW); 	
-	}
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
 		(void*)0);
 	glEnableVertexAttribArray(0);
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0);
-		glBindVertexArray(obj->vao);
+	glBindVertexArray(obj->vao);
 	return (obj);
 }
 

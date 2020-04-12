@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:08:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/06 17:14:03 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/08 16:49:26 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ static t_array	identity(t_array vertices, t_mat4 identity)
 		apush(&vertice_final, &push);
 		i++;
 	}
+	if (vertices.allocated != 0)
+		free(vertices.memory);
 	return (vertice_final);
 }
 
-t_array			transformation(t_array vertices, t_matrice matrice)
+t_array			transformation(t_array vertices_final, t_matrice matrice)
 {
-	t_array	vertices_final;
-
-	vertices_final = identity(vertices, matrice.identity);
+	vertices_final = identity(vertices_final, matrice.identity);
 	vertices_final = scale(vertices_final, matrice.scale);
 	// vertices_final = rotation(vertices_final, matrice.rotation);
 	vertices_final = translation(vertices_final, matrice.translation);
