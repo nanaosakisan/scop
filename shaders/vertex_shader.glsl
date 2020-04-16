@@ -9,6 +9,6 @@ uniform mat4 projection;
 void main()
 {
     //ajouter normalisation plus tard
-    // gl_Position = (projection * view * model) * vertex_pos;
-    gl_Position = vertex_pos;
+    gl_Position = (projection * view * model) * vertex_pos;
+    // gl_Position = vertex_pos;
 }

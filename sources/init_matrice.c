@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:42:19 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/12 17:51:33 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/16 14:53:30 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ static t_mat4	init_scale()
 	return (scale);
 }
 
-static t_mat4	init_translation()
+static t_mat4	init_translation(t_vec3 trans)
 {
 	t_mat4 translation;
 
-	translation.x1 = 1;
+	translation.x1 = trans.x;
 	translation.y1 = 0;
 	translation.z1 = 0;
 	translation.w1 = 0;
 	translation.x2 = 0;
-	translation.y2 = 1;
+	translation.y2 = trans.y;
 	translation.z2 = 0;
 	translation.w2 = 0;
 	translation.x3 = 0;
 	translation.y3 = 0;
-	translation.z3 = 1;
+	translation.z3 = trans.z;
 	translation.w3 = 0;
 	translation.x4 = 0;
 	translation.y4 = 0;
@@ -150,26 +150,46 @@ static	t_mat4	init_rot_z(t_env env)
 	return (rot_z);
 }
 
+static t_mat4	init_rot(t_vec3 right, t_vec3 up, t_vec3 dir)
+{
+	t_mat4	rot;
+
+	rot.x1 = right.x;
+	rot.y1 = right.y;
+	rot.z1 = right.z;
+	rot.w1 = 0;
+	rot.x2 = up.x;
+	rot.y2 = up.y;
+	rot.z2 = up.z;
+	rot.w2 = 0;
+	rot.x3 = dir.x;
+	rot.y3 = dir.y;
+	rot.z3 = dir.z;
+	rot.w3 = 0;
+	rot.x4 = 0;
+	rot.y4 = 0;
+	rot.z4 = 0;
+	rot.w4 = 1;
+	return (rot);
+}
+
 static t_mat4	init_view()
 {
+	t_vec3	pos;
+	t_vec3	dir;
+	t_vec3	right;
+	t_vec3	up;
+	t_mat4	trans;
+	t_mat4	rot;
 	t_mat4	view;
 
-	view.x1 = 4;
-	view.y1 = 3;
-	view.z1 = 3;
-	view.w1 = 0;
-	view.x2 = 0;
-	view.y2 = 0;
-	view.z2 = 0;
-	view.w2 = 0;
-	view.x3 = 0;
-	view.y3 = 1;
-	view.z3 = 0;
-	view.w3 = 0;
-	view.x4 = 0;
-	view.y4 = 0;
-	view.z4 = 0;
-	view.w4 = 1;
+	pos = vec3_new(0, 0, 0);
+	dir = vec3_sub(pos, (vec3_new(0, 0, 0))); //normaliser ?
+	right = vec3_cross(vec3_new(0, 1, 0), dir);
+	up = vec3_cross(dir, right);
+	trans = init_translation(pos);
+	rot = init_rot(right, up, dir);
+	view = mat_mat(rot, trans);
 	return (view);
 }
 
@@ -209,17 +229,23 @@ static t_mat4	init_projection()
 t_matrice		*init_matrice(t_env env)
 {
 	t_matrice	*matrice;
+	t_mat4		view;
 
 	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
 		return (NULL);
 	matrice->identity = init_identity();
 	matrice->scale = init_scale();
-	matrice->translation = init_translation();
+	matrice->translation = init_translation(vec3_new(1, 1, 1));
 	matrice->rot_x = init_rot_x(env);
 	matrice->rot_y = init_rot_y(env);
 	matrice->rot_z = init_rot_z(env);
 	matrice->model = init_identity();
 	matrice->view = init_view();
+	view = glm::lookAt(
+               glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
+               glm::vec3(0,0,0), // and looks at the origin
+               glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
+               );
 	matrice->projection = init_projection();
 	return (matrice);
 }

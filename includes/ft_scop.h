@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/12 17:49:35 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/15 15:14:13 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,10 @@ void			error_callback(const char *error, const char *description);
 
 t_matrice		*init_matrice(t_env env);
 void			init_mvp(t_env env, t_matrice matrice);
-t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
-t_array			transformation(t_array vertices_final, t_matrice matrice);
 
+t_array			transformation(t_array vertices_final, t_matrice matrice);
 t_mat4			update_translation(t_mat4 translation, t_env env);
 
+t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
+t_mat4			mat_mat(t_mat4 m1, t_mat4 m2);
 #endif
