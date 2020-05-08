@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "libft.h": "c",
-        "__tuple": "c"
+        "__tuple": "c",
+        "ft_scop.h": "c"
     }
 }

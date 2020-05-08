@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:42:19 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/16 14:53:30 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/08 16:16:14 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ static t_mat4	init_translation(t_vec3 trans)
 {
 	t_mat4 translation;
 
-	translation.x1 = trans.x;
+	translation.x1 = 1;
 	translation.y1 = 0;
 	translation.z1 = 0;
-	translation.w1 = 0;
+	translation.w1 = -trans.x;
 	translation.x2 = 0;
-	translation.y2 = trans.y;
+	translation.y2 = 1;
 	translation.z2 = 0;
-	translation.w2 = 0;
+	translation.w2 = -trans.y;
 	translation.x3 = 0;
 	translation.y3 = 0;
-	translation.z3 = trans.z;
-	translation.w3 = 0;
+	translation.z3 = 1;
+	translation.w3 = -trans.z;
 	translation.x4 = 0;
 	translation.y4 = 0;
 	translation.z4 = 0;
@@ -183,9 +183,9 @@ static t_mat4	init_view()
 	t_mat4	rot;
 	t_mat4	view;
 
-	pos = vec3_new(0, 0, 0);
-	dir = vec3_sub(pos, (vec3_new(0, 0, 0))); //normaliser ?
-	right = vec3_cross(vec3_new(0, 1, 0), dir);
+	pos = vec3_new(0, 0, 3);
+	dir = vec3_normalize(vec3_sub(pos, vec3_new(0, 0, 0)));
+	right = vec3_normalize(vec3_cross(vec3_new(0, 1, 0), dir));
 	up = vec3_cross(dir, right);
 	trans = init_translation(pos);
 	rot = init_rot(right, up, dir);
@@ -203,7 +203,7 @@ static t_mat4	init_projection()
 	float	denom;
 
 	ar = HEIGHT / WIDTH;
-	angle = 45;
+	angle = M_PI / 2;
 	z_near = -1;
 	z_far = 1000;
 	denom = z_near - z_far;
@@ -229,23 +229,16 @@ static t_mat4	init_projection()
 t_matrice		*init_matrice(t_env env)
 {
 	t_matrice	*matrice;
-	t_mat4		view;
 
 	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
 		return (NULL);
 	matrice->identity = init_identity();
 	matrice->scale = init_scale();
-	matrice->translation = init_translation(vec3_new(1, 1, 1));
 	matrice->rot_x = init_rot_x(env);
 	matrice->rot_y = init_rot_y(env);
 	matrice->rot_z = init_rot_z(env);
 	matrice->model = init_identity();
 	matrice->view = init_view();
-	view = glm::lookAt(
-               glm::vec3(4,3,3), // Camera is at (4,3,3), in World Space
-               glm::vec3(0,0,0), // and looks at the origin
-               glm::vec3(0,1,0)  // Head is up (set to 0,-1,0 to look upside-down)
-               );
 	matrice->projection = init_projection();
 	return (matrice);
 }

@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/15 15:14:13 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/08 16:15:42 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 
 # define HEIGHT 640
 # define WIDTH 480
+
+# ifndef M_PI 
+#  define M_PI 3.1415926535 
+# endif
 
 # define N_KEY 284
 
@@ -116,4 +120,9 @@ t_mat4			update_translation(t_mat4 translation, t_env env);
 
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_mat4			mat_mat(t_mat4 m1, t_mat4 m2);
+
+//A supprimer
+void    print_mat(t_mat4 mat);
+void	print_vec3(t_vec3 vec);
+
 #endif

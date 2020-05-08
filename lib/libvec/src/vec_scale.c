@@ -6,13 +6,13 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 17:19:41 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 17:23:04 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/16 17:14:09 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libvec.h>
 
-t_vec4	vec4_scale(t_vec4 vec, int scale)
+t_vec4	vec4_scale(t_vec4 vec, float scale)
 {
 	t_vec4	res;
 
@@ -23,7 +23,7 @@ t_vec4	vec4_scale(t_vec4 vec, int scale)
 	return (res);
 }
 
-t_vec3	vec3_scale(t_vec3 vec, int scale)
+t_vec3	vec3_scale(t_vec3 vec, float scale)
 {
 	t_vec3	res;
 
@@ -33,7 +33,7 @@ t_vec3	vec3_scale(t_vec3 vec, int scale)
 	return (res);
 }
 
-t_vec2	vec2_scale(t_vec2 vec, int scale)
+t_vec2	vec2_scale(t_vec2 vec, float scale)
 {
 	t_vec2	res;
 
