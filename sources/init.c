@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/04/12 18:32:43 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 15:09:34 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,15 @@ t_env	*init()
 	env->angle_y = 0;
 	env->angle_z = 0;
 	return (env);
+}
+
+t_state		*init_state()
+{
+	t_state	*state;
+
+	state = (t_state *)malloc(sizeof(t_state));
+	state->cam_pos = vec3_new(0, 0, 3);
+	state->cam_front = vec3_new(0, 0, -1);
+	state->cam_up = vec3_new(0, 1, 0);
+	return (state);
 }

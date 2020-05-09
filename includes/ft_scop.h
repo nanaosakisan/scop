@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/08 16:15:42 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 15:11:41 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,18 @@ typedef struct	s_obj
 {
 	GLuint	vbo;
 	GLuint	vao;
-	GLuint	ebo;
 	t_array	vertices;
 	t_array	vertices_final;
 	t_array	indices;
 }			t_obj;
+
+typedef	struct	s_state
+{
+	t_vec3	cam_pos;
+	t_vec3	cam_front;
+	t_vec3	cam_up;
+}				t_state;
+
 
 typedef	struct	s_mat4
 {
@@ -92,7 +99,6 @@ typedef	struct	s_mat4
 
 typedef	struct	s_matrice
 {
-	t_mat4	translation;
 	t_mat4	identity;
 	t_mat4	rot_x;
 	t_mat4	rot_y;
@@ -103,16 +109,20 @@ typedef	struct	s_matrice
 	t_mat4	projection;
 }				t_matrice;
 
-void			get_error();
-t_obj			*parsing(char *path);
-t_array			vertice_to_final(t_array vertices, t_array indices);
-void			draw(t_env env, t_obj triangle, t_matrice matrice);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
+t_state			*init_state();
 GLuint			load_shaders();
+t_obj			*parsing(char *path);
+t_array			vertice_to_final(t_array vertices, t_array indices);
+
+void			get_error();
 void			error_callback(const char *error, const char *description);
 
-t_matrice		*init_matrice(t_env env);
+void			draw(t_env env, t_obj triangle, t_matrice matrice);
+
+t_matrice		*init_matrice(t_env env, t_state state);
+t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
 void			init_mvp(t_env env, t_matrice matrice);
 
 t_array			transformation(t_array vertices_final, t_matrice matrice);

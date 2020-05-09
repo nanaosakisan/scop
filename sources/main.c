@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/08 16:30:39 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 15:41:31 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,35 @@ void	get_error()
 static t_mat4	update_model(t_mat4 model, t_env env)
 {
 	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		model.y4 += 0.1;
+		model.y4 += 0.01;
 	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		model.y4 -= 0.1;
+		model.y4 -= 0.01;
 	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		model.x4 -= 0.1;
+		model.x4 -= 0.01;
 	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		model.x4 += 0.1;
+		model.x4 += 0.01;
 	return (model);
+}
+
+static t_mat4	update_view(t_mat4 view, t_env env, t_state state)
+{
+ const float cam_speed = 0.05f; // adjust accordingly
+    if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
+        state.cam_pos = vec3_add(state.cam_pos, vec3_scale(state.cam_front,\
+			cam_speed));
+    if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
+        state.cam_pos = vec3_sub(state.cam_pos, vec3_scale(state.cam_front,\
+			cam_speed));
+    if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
+        state.cam_pos = vec3_sub(state.cam_pos, vec3_normalize(vec3_scale(\
+			vec3_cross(state.cam_front, state.cam_up), cam_speed)));
+    if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+        state.cam_pos = vec3_add(state.cam_pos, vec3_normalize(vec3_scale(\
+			vec3_cross(state.cam_front, state.cam_up), cam_speed)));
+	}
+	view = init_view(state.cam_pos, vec3_add(state.cam_pos, state.cam_front), state.cam_up);
+	return (view);
 }
 
 int		main(int ac, char **av)
@@ -64,12 +85,14 @@ int		main(int ac, char **av)
 	t_env		*env;
 	t_obj		*obj;
 	t_matrice	*matrice;
+	t_state		*state;
 
 	if (ac == 2 && av[1])
 	{
 		env = init();
 		obj = parsing(av[1]);
-		matrice = init_matrice(*env);
+		state = init_state();
+		matrice = init_matrice(*env, *state);
 		env->program_id = load_shaders();
 		env->model_id = glGetUniformLocation(env->program_id, "model");
 		env->view_id = glGetUniformLocation(env->program_id, "view");
@@ -80,7 +103,8 @@ int		main(int ac, char **av)
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
 			// update position et zoom;
-			matrice->model = update_model(matrice->model, *env);
+			// matrice->model = update_model(matrice->model, *env);
+			matrice->view = update_view(matrice->view, *env, *state);
 			draw(*env, *obj, *matrice);
 		}
 		clean(env, obj, matrice);

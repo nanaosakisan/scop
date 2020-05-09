@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:42:19 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/08 16:16:14 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 15:19:31 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,19 +173,16 @@ static t_mat4	init_rot(t_vec3 right, t_vec3 up, t_vec3 dir)
 	return (rot);
 }
 
-static t_mat4	init_view()
+t_mat4	init_view(t_vec3 pos, t_vec3 target, t_vec3 up)
 {
-	t_vec3	pos;
 	t_vec3	dir;
 	t_vec3	right;
-	t_vec3	up;
 	t_mat4	trans;
 	t_mat4	rot;
 	t_mat4	view;
 
-	pos = vec3_new(0, 0, 3);
-	dir = vec3_normalize(vec3_sub(pos, vec3_new(0, 0, 0)));
-	right = vec3_normalize(vec3_cross(vec3_new(0, 1, 0), dir));
+	dir = vec3_normalize(vec3_sub(pos, target));
+	right = vec3_normalize(vec3_cross(up, dir));
 	up = vec3_cross(dir, right);
 	trans = init_translation(pos);
 	rot = init_rot(right, up, dir);
@@ -226,7 +223,7 @@ static t_mat4	init_projection()
 	return (projection);
 }
 
-t_matrice		*init_matrice(t_env env)
+t_matrice		*init_matrice(t_env env, t_state state)
 {
 	t_matrice	*matrice;
 
@@ -238,7 +235,8 @@ t_matrice		*init_matrice(t_env env)
 	matrice->rot_y = init_rot_y(env);
 	matrice->rot_z = init_rot_z(env);
 	matrice->model = init_identity();
-	matrice->view = init_view();
+	matrice->view = init_view(state.cam_pos, vec3_add(state.cam_pos,\
+		state.cam_front), state.cam_up);
 	matrice->projection = init_projection();
 	return (matrice);
 }
