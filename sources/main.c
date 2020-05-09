@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/09 15:41:31 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 16:15:48 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,33 @@ static t_mat4	update_model(t_mat4 model, t_env env)
 	return (model);
 }
 
-static t_mat4	update_view(t_mat4 view, t_env env, t_state state)
-{
- const float cam_speed = 0.05f; // adjust accordingly
-    if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-        state.cam_pos = vec3_add(state.cam_pos, vec3_scale(state.cam_front,\
-			cam_speed));
-    if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-        state.cam_pos = vec3_sub(state.cam_pos, vec3_scale(state.cam_front,\
-			cam_speed));
-    if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-        state.cam_pos = vec3_sub(state.cam_pos, vec3_normalize(vec3_scale(\
-			vec3_cross(state.cam_front, state.cam_up), cam_speed)));
-    if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-	{
-        state.cam_pos = vec3_add(state.cam_pos, vec3_normalize(vec3_scale(\
-			vec3_cross(state.cam_front, state.cam_up), cam_speed)));
-	}
-	view = init_view(state.cam_pos, vec3_add(state.cam_pos, state.cam_front), state.cam_up);
-	return (view);
-}
+// static t_state	update_state(t_env env, t_state state)
+// {
+ 	// const float cam_speed = 0.1f; // adjust accordingly
+    // if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
+    //     state.cam_pos = vec3_add(state.cam_pos, vec3_scale(state.cam_front,\
+	// 		cam_speed));
+    // if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
+    //     state.cam_pos = vec3_sub(state.cam_pos, vec3_scale(state.cam_front,\
+	// 		cam_speed));
+    // if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
+    //     state.cam_pos = vec3_sub(state.cam_pos, vec3_normalize(vec3_scale(\
+	// 		vec3_cross(state.cam_front, state.cam_up), cam_speed)));
+    // if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
+	// {
+    //     state.cam_pos = vec3_add(state.cam_pos, vec3_normalize(vec3_scale(\
+	// 		vec3_cross(state.cam_front, state.cam_up), cam_speed)));
+	// }
+	// if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
+    //     state.cam_pos.y += 0.1;
+    // if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
+    //     state.cam_pos.y -= 0.1;
+    // if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
+    //     state.cam_pos.x += 0.1;
+    // if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
+    //     state.cam_pos.y -= 0.1;
+// 	return (state);
+// }
 
 int		main(int ac, char **av)
 {
@@ -103,8 +110,10 @@ int		main(int ac, char **av)
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
 			// update position et zoom;
-			// matrice->model = update_model(matrice->model, *env);
-			matrice->view = update_view(matrice->view, *env, *state);
+			matrice->model = update_model(matrice->model, *env);
+			// *state = update_state(*env, *state);
+			// matrice->view = init_view(state->cam_pos, vec3_add(state->cam_pos,\
+			// 	state->cam_front), state->cam_up);
 			draw(*env, *obj, *matrice);
 		}
 		clean(env, obj, matrice);

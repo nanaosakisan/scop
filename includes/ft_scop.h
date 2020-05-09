@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:48:34 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/09 15:11:41 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 15:43:36 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef	struct	s_mat4
 
 typedef	struct	s_matrice
 {
-	t_mat4	identity;
 	t_mat4	rot_x;
 	t_mat4	rot_y;
 	t_mat4	rot_z;
