@@ -6,11 +6,11 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 15:38:39 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/09 15:09:34 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
 
 void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -23,34 +23,24 @@ void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-t_obj	*init_triangle_obj(t_obj *obj)
+t_obj	*init_obj(t_obj *obj)
 {
 
 	float	*vert;
-	int		*indices;
 
-	vert = (float *)obj->vertices.first;
-	indices = (int *)obj->indices.first;
+	vert = (float *)obj->vertices_final.first;
 	glGenBuffers(1, &obj->vbo);
-	if (obj->indices.len != 0)
-		glGenBuffers(1, &obj->ebo);
 	glBindBuffer(GL_ARRAY_BUFFER, obj->vbo);
-	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices.len),
+	glBufferData(GL_ARRAY_BUFFER, (obj->vertices.elem_size * obj->vertices_final.len),
 		vert, GL_STATIC_DRAW);
 	glGenVertexArrays(1, &obj->vao);
 	glBindVertexArray(obj->vao);
-	if (obj->indices.len != 0)
-	{
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, obj->ebo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, (obj->indices.elem_size
-			* obj->indices.len), indices, GL_STATIC_DRAW); 	
-	}
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float),
 		(void*)0);
 	glEnableVertexAttribArray(0);
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
-	glBindVertexArray(0);  
+	glBindVertexArray(0);
+	glBindVertexArray(obj->vao);
 	return (obj);
 }
 
@@ -83,5 +73,19 @@ t_env	*init()
 	glfwSetFramebufferSizeCallback(env->window, framebuffer_size_callback);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
+	env->angle_x = 0;
+	env->angle_y = 0;
+	env->angle_z = 0;
 	return (env);
+}
+
+t_state		*init_state()
+{
+	t_state	*state;
+
+	state = (t_state *)malloc(sizeof(t_state));
+	state->cam_pos = vec3_new(0, 0, 3);
+	state->cam_front = vec3_new(0, 0, -1);
+	state->cam_up = vec3_new(0, 1, 0);
+	return (state);
 }

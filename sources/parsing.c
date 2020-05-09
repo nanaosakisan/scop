@@ -6,17 +6,22 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 16:41:30 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/21 16:42:12 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/11 19:07:44 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
-static t_array	parse_vertice(char **split, t_array vertices)
+static void	parse_vertice(char **split, t_array *vertices)
 {
 	int		i;
 	t_vec4	push;
 
+	i = 1;
+	while (split[i])
+		i++;
+	if (i != 4)
+		return;
 	i = 1;
 	if (split[i])
 	{
@@ -24,27 +29,53 @@ static t_array	parse_vertice(char **split, t_array vertices)
 		push.y = (float)ft_atof(split[2]);
 		push.z = (float)ft_atof(split[3]);
 		push.w = 1;
-		apush(&vertices, &push);
+		apush(vertices, &push);
 	}
-	return (vertices);
 }
 
-static t_array	parse_indice(char **split, t_array indices)
+static void	triangulate(char **str, int end, t_array *indices)
 {
-	int	i;
-	int	push;
+	int			start;
+	int			push;
+
+	start = 2;
+	while (start < end - 1)
+	{
+		push = ft_atoi(str[start]);
+		apush(indices, &push);
+		push = ft_atoi(str[start + 1]);
+		apush(indices, &push);
+		push = ft_atoi(str[1]);
+		apush(indices, &push);
+		start++;
+	}
+}
+
+static void	parse_indice(char **split, t_array *indices)
+{
+	int			i;
+	int			push;
 
 	i = 1;
 	while (split[i])
-	{
-		if (split[i])
-		{
-			push = ft_atoi(split[i]);
-			apush(&indices, &push);
-		}
 		i++;
+	if (i < 4)
+		return ;
+	if (i == 4)
+	{
+		i = 1;
+		while (split[i])
+		{
+			if (split[i])
+			{
+				push = ft_atoi(split[i]);
+				apush(indices, &push);
+			}
+			i++;
+		}
 	}
-	return (indices);
+	else
+		triangulate(split, i, indices);
 }
 
 static t_obj	*read_file(int fd, t_obj *obj)
@@ -59,9 +90,9 @@ static t_obj	*read_file(int fd, t_obj *obj)
 	{
 		split = ft_strsplit(line, ' ');
 		if (ft_strequ(split[0], "v") == 1)
-			obj->vertices = parse_vertice(split, obj->vertices);
+			parse_vertice(split, &obj->vertices);
 		else if (ft_strequ(split[0], "f") == 1)
-			obj->indices = parse_indice(split, obj->indices);
+			parse_indice(split, &obj->indices);
 		ft_strdel(&line);
 		free(split);
 	}
@@ -86,7 +117,11 @@ t_obj			*parsing(char *path)
 		return (NULL);
 	}
 	obj->vertices = anew(NULL, 1, sizeof(t_vec4));
-	obj->indices = anew(NULL, 1, sizeof(int));
+	obj->indices = anew(NULL, 0, sizeof(int));
 	obj = read_file(fd, obj);
+	if (obj->indices.len != 0)
+		obj->vertices_final = vertice_to_final(obj->vertices, obj->indices);
+	else
+		obj->vertices_final = obj->vertices;
 	return (obj);
 }

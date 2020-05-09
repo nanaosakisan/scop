@@ -6,11 +6,11 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:31:54 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/02/20 17:31:11 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/07 13:55:32 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_scop.h"
+#include <ft_scop.h>
 
 static int		check_shader_link(GLuint program_id, GLuint shader_id)
 {

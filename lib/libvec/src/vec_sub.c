@@ -6,13 +6,13 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 15:49:20 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/03/07 15:49:37 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/04/15 15:17:14 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libvec.h>
 
-t_vec4	vec4_add(t_vec4 vec1, t_vec4 vec2)
+t_vec4	vec4_sub(t_vec4 vec1, t_vec4 vec2)
 {
 	t_vec4 res;
 
@@ -23,7 +23,7 @@ t_vec4	vec4_add(t_vec4 vec1, t_vec4 vec2)
 	return (res);
 }
 
-t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2)
+t_vec3	vec3_sub(t_vec3 vec1, t_vec3 vec2)
 {
 	t_vec3 res;
 
@@ -33,7 +33,7 @@ t_vec3	vec3_add(t_vec3 vec1, t_vec3 vec2)
 	return (res);
 }
 
-t_vec2	vec2_add(t_vec2 vec1, t_vec2 vec2)
+t_vec2	vec2_sub(t_vec2 vec1, t_vec2 vec2)
 {
 	t_vec2 res;
 

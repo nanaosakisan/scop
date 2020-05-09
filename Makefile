@@ -6,7 +6,7 @@
 #    By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 11:03:17 by iporsenn          #+#    #+#              #
-#    Updated: 2020/03/07 17:46:41 by iporsenn         ###   ########.fr        #
+#    Updated: 2020/05/08 16:14:25 by iporsenn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,16 @@ LIB_GLFW = $(LIB_DIR)/GLFW
 LIBGLFW_DIR = $(LIB_GLFW)/src
 LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
-SRC_NAME =	main.c			\
-			init.c			\
-			draw.c			\
-			load_shaders.c	\
-			parsing.c
+SRC_NAME =	main.c				\
+			init.c				\
+			init_matrice.c		\
+			draw.c				\
+			load_shaders.c		\
+			parsing.c			\
+			parsing_tool.c		\
+			matrice_al.c		\
+			event.c				\
+			print.c
 
 INC_NAME = ft_scop.h	\
 
