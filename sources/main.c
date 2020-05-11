@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 14:42:56 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/09 16:15:48 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/11 16:02:27 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		main(int ac, char **av)
 	{
 		env = init();
 		obj = parsing(av[1]);
+		obj = init_obj(obj);
 		state = init_state();
 		matrice = init_matrice(*env, *state);
 		env->program_id = load_shaders();
@@ -105,7 +106,7 @@ int		main(int ac, char **av)
 		env->view_id = glGetUniformLocation(env->program_id, "view");
 		env->projection_id = glGetUniformLocation(env->program_id, "projection");
 		get_error();
-		obj = init_obj(obj);
+	
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{

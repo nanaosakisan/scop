@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:42:19 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/09 15:45:06 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/11 15:22:19 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static t_mat4	init_identity()
 	identity.w4 = 1;
 	return (identity);
 }
-
 
 static t_mat4	init_translation(t_vec3 trans)
 {
