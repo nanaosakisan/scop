@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:42:19 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/11 15:22:19 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/05/11 16:43:23 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ t_mat4	init_view(t_vec3 pos, t_vec3 target, t_vec3 up)
 	return (view);
 }
 
-static t_mat4	init_projection()
+t_mat4		init_projection()
 {
 	t_mat4	projection;
 	float	ar;
