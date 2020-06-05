@@ -6,7 +6,7 @@
 /*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 16:42:19 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/11 16:43:23 by iporsenn         ###   ########.fr       */
+/*   Updated: 2020/06/05 18:40:21 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,26 +167,22 @@ t_mat4	init_view(t_vec3 pos, t_vec3 target, t_vec3 up)
 	return (view);
 }
 
-t_mat4		init_projection()
+t_mat4		init_projection(float fov, float ar)
 {
 	t_mat4	projection;
-	float	ar;
-	float	angle;
 	float	z_near;
 	float	z_far;
 	float	denom;
 
-	ar = HEIGHT / WIDTH;
-	angle = M_PI / 2;
 	z_near = -1;
 	z_far = 1000;
 	denom = z_near - z_far;
-	projection.x1 = 1 / (ar * tan(angle / 2));
+	projection.x1 = 1 / (ar * tan(fov / 2));
 	projection.y1 = 0;
 	projection.z1 = 0;
 	projection.w1 = 0;
 	projection.x2 = 0;
-	projection.y2 = 1 / tan(angle / 2);
+	projection.y2 = 1 / tan(fov / 2);
 	projection.z2 = 0;
 	projection.w2 = 0;
 	projection.x3 = 0;
@@ -200,6 +196,41 @@ t_mat4		init_projection()
 	return (projection);
 }
 
+// t_mat4		init_projection(float fov)
+// {
+// 	t_mat4	projection;
+// 	float	ar;
+// 	float	angle;
+// 	float	z_near;
+// 	float	z_far;
+// 	float	denom;
+
+// 	ar = HEIGHT / WIDTH;
+// 	float	y_scale = 1 / (fov / 2);
+// 	float	x_scale = y_scale / ar;
+
+// 	z_near = -1;
+// 	z_far = 1000;
+// 	denom = z_far - z_near;
+// 	projection.x1 = x_scale;
+// 	projection.y1 = 0.0;
+// 	projection.z1 = 0.0;
+// 	projection.w1 = 0.0;
+// 	projection.x2 = 0.0;
+// 	projection.y2 = y_scale;
+// 	projection.z2 = 0.0;
+// 	projection.w2 = 0.0;
+// 	projection.x3 = 0.0;
+// 	projection.y3 = 0.0;
+// 	projection.z3 = -((z_far + z_near) / denom);
+// 	projection.w3 = -1.0;
+// 	projection.x4 = 0.0;
+// 	projection.y4 = 0.0;
+// 	projection.z4 = -((2 * z_far * z_near) / denom) - 2;
+// 	projection.w4 = 0.0;
+// 	return (projection);
+// }
+
 t_matrice		*init_matrice(t_env env, t_state state)
 {
 	t_matrice	*matrice;
@@ -212,7 +243,7 @@ t_matrice		*init_matrice(t_env env, t_state state)
 	matrice->model = init_identity();
 	matrice->view = init_view(state.cam_pos, vec3_add(state.cam_pos,\
 		state.cam_front), state.cam_up);
-	matrice->projection = init_projection();
+	matrice->projection = init_projection(state.fov, HEIGHT / WIDTH);
 	return (matrice);
 }
 
