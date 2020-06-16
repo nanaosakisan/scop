@@ -69,14 +69,6 @@ typedef struct	s_obj
 	t_array	indices;
 }			t_obj;
 
-typedef	struct	s_state
-{
-	t_vec3	cam_pos;
-	t_vec3	cam_front;
-	t_vec3	cam_up;
-}				t_state;
-
-
 typedef	struct	s_mat4
 {
 	GLfloat	x1;
@@ -96,6 +88,13 @@ typedef	struct	s_mat4
 	GLfloat	z4;
 	GLfloat	w4;
 }				t_mat4;
+
+typedef	struct	s_state
+{
+	t_vec3	cam_pos;
+	t_vec3	cam_up;
+	t_vec3	cam_front;
+}				t_state;
 
 typedef	struct	s_matrice
 {

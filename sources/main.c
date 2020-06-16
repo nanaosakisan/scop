@@ -46,47 +46,6 @@ void	get_error()
 	}
 }
 
-static t_mat4	update_model(t_mat4 model, t_env env)
-{
-	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		model.y4 += 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		model.y4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		model.x4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		model.x4 += 0.01;
-	return (model);
-}
-
-// static t_state	update_state(t_env env, t_state state)
-// {
- 	// const float cam_speed = 0.1f; // adjust accordingly
-    // if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-    //     state.cam_pos = vec3_add(state.cam_pos, vec3_scale(state.cam_front,\
-	// 		cam_speed));
-    // if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-    //     state.cam_pos = vec3_sub(state.cam_pos, vec3_scale(state.cam_front,\
-	// 		cam_speed));
-    // if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-    //     state.cam_pos = vec3_sub(state.cam_pos, vec3_normalize(vec3_scale(\
-	// 		vec3_cross(state.cam_front, state.cam_up), cam_speed)));
-    // if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-	// {
-    //     state.cam_pos = vec3_add(state.cam_pos, vec3_normalize(vec3_scale(\
-	// 		vec3_cross(state.cam_front, state.cam_up), cam_speed)));
-	// }
-	// if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-    //     state.cam_pos.y += 0.1;
-    // if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-    //     state.cam_pos.y -= 0.1;
-    // if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-    //     state.cam_pos.x += 0.1;
-    // if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-    //     state.cam_pos.y -= 0.1;
-// 	return (state);
-// }
-
 int		main(int ac, char **av)
 {
 	t_env		*env;
@@ -109,11 +68,6 @@ int		main(int ac, char **av)
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
-			// update position et zoom;
-			matrice->model = update_model(matrice->model, *env);
-			// *state = update_state(*env, *state);
-			// matrice->view = init_view(state->cam_pos, vec3_add(state->cam_pos,\
-			// 	state->cam_front), state->cam_up);
 			draw(*env, *obj, *matrice);
 		}
 		clean(env, obj, matrice);
