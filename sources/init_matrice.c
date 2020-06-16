@@ -58,74 +58,74 @@ static t_mat4	init_translation(t_vec3 trans)
 	return (translation);
 }
 
-static	t_mat4	init_rot_x(t_env env)
-{
-	t_mat4 rot_x;
+// static	t_mat4	init_rot_x(t_env env)
+// {
+// 	t_mat4 rot_x;
 
-	rot_x.x1 = 1;
-	rot_x.y1 = 0;
-	rot_x.z1 = 0;
-	rot_x.w1 = 0;
-	rot_x.x2 = 0;
-	rot_x.y2 = cos(env.angle_x);
-	rot_x.z2 = -sin(env.angle_x);
-	rot_x.w2 = 0;
-	rot_x.x3 = 0;
-	rot_x.y3 = sin(env.angle_x);
-	rot_x.z3 = cos(env.angle_x);
-	rot_x.w3 = 0;
-	rot_x.x4 = 0;
-	rot_x.y4 = 0;
-	rot_x.z4 = 0;
-	rot_x.w4 = 1;
-	return (rot_x);
-}
+// 	rot_x.x1 = 1;
+// 	rot_x.y1 = 0;
+// 	rot_x.z1 = 0;
+// 	rot_x.w1 = 0;
+// 	rot_x.x2 = 0;
+// 	rot_x.y2 = cos(env.angle_x);
+// 	rot_x.z2 = -sin(env.angle_x);
+// 	rot_x.w2 = 0;
+// 	rot_x.x3 = 0;
+// 	rot_x.y3 = sin(env.angle_x);
+// 	rot_x.z3 = cos(env.angle_x);
+// 	rot_x.w3 = 0;
+// 	rot_x.x4 = 0;
+// 	rot_x.y4 = 0;
+// 	rot_x.z4 = 0;
+// 	rot_x.w4 = 1;
+// 	return (rot_x);
+// }
 
-static	t_mat4	init_rot_y(t_env env)
-{
-	t_mat4 rot_y;
+// static	t_mat4	init_rot_y(t_env env)
+// {
+// 	t_mat4 rot_y;
 
-	rot_y.x1 = cos(env.angle_y);
-	rot_y.y1 = 0;
-	rot_y.z1 = sin(env.angle_y);
-	rot_y.w1 = 0;
-	rot_y.x2 = 0;
-	rot_y.y2 = 1;
-	rot_y.z2 = 0;
-	rot_y.w2 = 0;
-	rot_y.x3 = -sin(env.angle_y);
-	rot_y.y3 = 0;
-	rot_y.z3 = cos(env.angle_y);
-	rot_y.w3 = 0;
-	rot_y.x4 = 0;
-	rot_y.y4 = 0;
-	rot_y.z4 = 0;
-	rot_y.w4 = 1;
-	return (rot_y);
-}
+// 	rot_y.x1 = cos(env.angle_y);
+// 	rot_y.y1 = 0;
+// 	rot_y.z1 = sin(env.angle_y);
+// 	rot_y.w1 = 0;
+// 	rot_y.x2 = 0;
+// 	rot_y.y2 = 1;
+// 	rot_y.z2 = 0;
+// 	rot_y.w2 = 0;
+// 	rot_y.x3 = -sin(env.angle_y);
+// 	rot_y.y3 = 0;
+// 	rot_y.z3 = cos(env.angle_y);
+// 	rot_y.w3 = 0;
+// 	rot_y.x4 = 0;
+// 	rot_y.y4 = 0;
+// 	rot_y.z4 = 0;
+// 	rot_y.w4 = 1;
+// 	return (rot_y);
+// }
 
-static	t_mat4	init_rot_z(t_env env)
-{
-	t_mat4 rot_z;
+// static	t_mat4	init_rot_z(t_env env)
+// {
+// 	t_mat4 rot_z;
 
-	rot_z.x1 = cos(env.angle_z);
-	rot_z.y1 = -sin(env.angle_z);
-	rot_z.z1 = 0;
-	rot_z.w1 = 0;
-	rot_z.x2 = sin(env.angle_z);
-	rot_z.y2 = cos(env.angle_z);
-	rot_z.z2 = 0;
-	rot_z.w2 = 0;
-	rot_z.x3 = 0;
-	rot_z.y3 = 0;
-	rot_z.z3 = 1;
-	rot_z.w3 = 0;
-	rot_z.x4 = 0;
-	rot_z.y4 = 0;
-	rot_z.z4 = 0;
-	rot_z.w4 = 1;
-	return (rot_z);
-}
+// 	rot_z.x1 = cos(env.angle_z);
+// 	rot_z.y1 = -sin(env.angle_z);
+// 	rot_z.z1 = 0;
+// 	rot_z.w1 = 0;
+// 	rot_z.x2 = sin(env.angle_z);
+// 	rot_z.y2 = cos(env.angle_z);
+// 	rot_z.z2 = 0;
+// 	rot_z.w2 = 0;
+// 	rot_z.x3 = 0;
+// 	rot_z.y3 = 0;
+// 	rot_z.z3 = 1;
+// 	rot_z.w3 = 0;
+// 	rot_z.x4 = 0;
+// 	rot_z.y4 = 0;
+// 	rot_z.z4 = 0;
+// 	rot_z.w4 = 1;
+// 	return (rot_z);
+// }
 
 static t_mat4	init_rot(t_vec3 right, t_vec3 up, t_vec3 dir)
 {
@@ -231,19 +231,16 @@ t_mat4		init_projection(float fov, float ar)
 // 	return (projection);
 // }
 
-t_matrice		*init_matrice(t_env env, t_state state)
+t_matrice		*init_matrice(t_env env)
 {
 	t_matrice	*matrice;
 
 	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
 		return (NULL);
-	matrice->rot_x = init_rot_x(env);
-	matrice->rot_y = init_rot_y(env);
-	matrice->rot_z = init_rot_z(env);
+	// matrice->rot_x = init_rot_x(env);
+	// matrice->rot_y = init_rot_y(env);
+	// matrice->rot_z = init_rot_z(env);
 	matrice->model = init_identity();
-	matrice->view = init_view(state.cam_pos, vec3_add(state.cam_pos,\
-		state.cam_front), state.cam_up);
-	matrice->projection = init_projection(state.fov, HEIGHT / WIDTH);
 	return (matrice);
 }
 
