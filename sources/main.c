@@ -63,7 +63,3 @@ int		main(int ac, char **av)
 		error_callback("Usage", "./ft_scope file.obj");
 	return (0);
 }
-
-// for (int i = 0; i < obj->vertices.len; i++)
-// 			printf("vec.x: %f, vec.y: %f\n", (*(t_vec4*)anth(&obj->vertices_final,\
-// 				i)).x, (*(t_vec4*)anth(&obj->vertices_final, i)).y);

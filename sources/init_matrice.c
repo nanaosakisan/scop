@@ -177,22 +177,22 @@ t_mat4		init_projection(float fov, float ar)
 	z_near = -1;
 	z_far = 1000;
 	denom = z_near - z_far;
-	projection.x1 = 1 / (ar * tan(fov / 2));
-	projection.y1 = 0;
-	projection.z1 = 0;
-	projection.w1 = 0;
-	projection.x2 = 0;
-	projection.y2 = 1 / tan(fov / 2);
-	projection.z2 = 0;
-	projection.w2 = 0;
-	projection.x3 = 0;
-	projection.y3 = 0;
+	projection.x1 = 1.0 / (ar * tan(fov / 2));
+	projection.y1 = 0.0;
+	projection.z1 = 0.0;
+	projection.w1 = 0.0;
+	projection.x2 = 0.0;
+	projection.y2 = 1.0 / tan(fov / 2);
+	projection.z2 = 0.0;
+	projection.w2 = 0.0;
+	projection.x3 = 0.0;
+	projection.y3 = 0.0;
 	projection.z3 = (- z_near - z_far) / denom;
-	projection.w3 = (2 * z_far * z_near) / denom;
-	projection.x4 = 0;
-	projection.y4 = 0;
-	projection.z4 = 1;
-	projection.w4 = 0;
+	projection.w3 = 2 * z_far * z_near / denom;
+	projection.x4 = 0.0;
+	projection.y4 = 0.0;
+	projection.z4 = 1.0;
+	projection.w4 = 0.0;
 	return (projection);
 }
 
