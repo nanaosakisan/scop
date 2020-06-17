@@ -90,13 +90,11 @@ typedef	struct	s_state
 {
 	float	angle_x;
 	float	angle_y;
+	float	fov;
 }				t_state;
 
 typedef	struct	s_matrice
 {
-	t_mat4	rot_x;
-	t_mat4	rot_y;
-	t_mat4	rot_z;
 	t_mat4	scale;
 	t_mat4	model;
 	t_mat4	view;
@@ -105,7 +103,7 @@ typedef	struct	s_matrice
 
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
-t_state			*init_state();
+t_state			*get_state();
 GLuint			load_shaders();
 t_obj			*parsing(char *path);
 t_array			vertice_to_final(t_array vertices, t_array indices);
@@ -115,7 +113,7 @@ void			error_callback(const char *error, const char *description);
 
 void			draw(t_env env, t_obj triangle, t_matrice matrice);
 
-t_matrice		*init_matrice(t_env env);
+t_matrice		*init_matrice();
 t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
 void			init_mvp(t_env env, t_matrice matrice);
 t_mat4			init_rot_x(float angle_x);

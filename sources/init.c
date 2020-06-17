@@ -133,14 +133,19 @@ t_env	*init()
 	return (env);
 }
 
+t_state		*get_state()
+{
+	static t_state *state = NULL;
+
+	if (state == NULL)
+		state = (t_state *)malloc(sizeof(t_state));	
+	return (state);
+}
+
 t_state		*init_state(t_state *state)
 {
-	if (state == NULL)
-	{
-		printf("buh\n");
-		state = (t_state *)malloc(sizeof(t_state));
-		state->angle_x = 0;
-		state->angle_y = 0;
-	}
+	state = get_state();
+	state->angle_x = 0;
+	state->angle_y = 0;
 	return (state);
 }

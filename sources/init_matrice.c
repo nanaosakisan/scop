@@ -105,29 +105,6 @@ t_mat4	init_rot_y(float angle_y)
 	return (rot_y);
 }
 
-static	t_mat4	init_rot_z(float angle_z)
-{
-	t_mat4 rot_z;
-
-	rot_z.x1 = cos(angle_z);
-	rot_z.y1 = -sin(angle_z);
-	rot_z.z1 = 0;
-	rot_z.w1 = 0;
-	rot_z.x2 = sin(angle_z);
-	rot_z.y2 = cos(angle_z);
-	rot_z.z2 = 0;
-	rot_z.w2 = 0;
-	rot_z.x3 = 0;
-	rot_z.y3 = 0;
-	rot_z.z3 = 1;
-	rot_z.w3 = 0;
-	rot_z.x4 = 0;
-	rot_z.y4 = 0;
-	rot_z.z4 = 0;
-	rot_z.w4 = 1;
-	return (rot_z);
-}
-
 static t_mat4	init_rot(t_vec3 right, t_vec3 up, t_vec3 dir)
 {
 	t_mat4	rot;
@@ -201,7 +178,7 @@ static t_mat4	init_projection()
 	return (projection);
 }
 
-t_matrice		*init_matrice(t_env env)
+t_matrice		*init_matrice()
 {
 	t_matrice	*matrice;
 

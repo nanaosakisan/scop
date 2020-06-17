@@ -57,8 +57,7 @@ int		main(int ac, char **av)
 	{
 		env = init();
 		obj = parsing(av[1]);
-		// state = init_state();
-		matrice = init_matrice(*env);
+		matrice = init_matrice();
 		env->program_id = load_shaders();
 		env->model_id = glGetUniformLocation(env->program_id, "model");
 		env->view_id = glGetUniformLocation(env->program_id, "view");
@@ -68,8 +67,6 @@ int		main(int ac, char **av)
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
-			// *state = update_orientation(*state, *env);
-	
 			draw(*env, *obj, *matrice);
 		}
 		clean(env, obj, matrice);

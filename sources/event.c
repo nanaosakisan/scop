@@ -19,6 +19,14 @@
 //         update_translation();
 // }
 
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	t_state *state;
+
+	state = get_state();
+	state->fov += 0.1 * yoffset;
+}
+
 t_state		update_orientation(t_state state, t_env env)
 {
 	double	pos_x;
