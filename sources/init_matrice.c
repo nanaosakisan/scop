@@ -59,7 +59,7 @@ static t_mat4	init_translation(t_vec3 trans)
 	return (translation);
 }
 
-static	t_mat4	init_rot_x(t_env env)
+t_mat4	init_rot_x(float angle_x)
 {
 	t_mat4 rot_x;
 
@@ -68,12 +68,12 @@ static	t_mat4	init_rot_x(t_env env)
 	rot_x.z1 = 0;
 	rot_x.w1 = 0;
 	rot_x.x2 = 0;
-	rot_x.y2 = cos(env.angle_x);
-	rot_x.z2 = -sin(env.angle_x);
+	rot_x.y2 = cos(angle_x);
+	rot_x.z2 = -sin(angle_x);
 	rot_x.w2 = 0;
 	rot_x.x3 = 0;
-	rot_x.y3 = sin(env.angle_x);
-	rot_x.z3 = cos(env.angle_x);
+	rot_x.y3 = sin(angle_x);
+	rot_x.z3 = cos(angle_x);
 	rot_x.w3 = 0;
 	rot_x.x4 = 0;
 	rot_x.y4 = 0;
@@ -82,21 +82,21 @@ static	t_mat4	init_rot_x(t_env env)
 	return (rot_x);
 }
 
-static	t_mat4	init_rot_y(t_env env)
+static	t_mat4	init_rot_y(float angle_y)
 {
 	t_mat4 rot_y;
 
-	rot_y.x1 = cos(env.angle_y);
+	rot_y.x1 = cos(angle_y);
 	rot_y.y1 = 0;
-	rot_y.z1 = sin(env.angle_y);
+	rot_y.z1 = sin(angle_y);
 	rot_y.w1 = 0;
 	rot_y.x2 = 0;
 	rot_y.y2 = 1;
 	rot_y.z2 = 0;
 	rot_y.w2 = 0;
-	rot_y.x3 = -sin(env.angle_y);
+	rot_y.x3 = -sin(angle_y);
 	rot_y.y3 = 0;
-	rot_y.z3 = cos(env.angle_y);
+	rot_y.z3 = cos(angle_y);
 	rot_y.w3 = 0;
 	rot_y.x4 = 0;
 	rot_y.y4 = 0;
@@ -105,16 +105,16 @@ static	t_mat4	init_rot_y(t_env env)
 	return (rot_y);
 }
 
-static	t_mat4	init_rot_z(t_env env)
+static	t_mat4	init_rot_z(float angle_z)
 {
 	t_mat4 rot_z;
 
-	rot_z.x1 = cos(env.angle_z);
-	rot_z.y1 = -sin(env.angle_z);
+	rot_z.x1 = cos(angle_z);
+	rot_z.y1 = -sin(angle_z);
 	rot_z.z1 = 0;
 	rot_z.w1 = 0;
-	rot_z.x2 = sin(env.angle_z);
-	rot_z.y2 = cos(env.angle_z);
+	rot_z.x2 = sin(angle_z);
+	rot_z.y2 = cos(angle_z);
 	rot_z.z2 = 0;
 	rot_z.w2 = 0;
 	rot_z.x3 = 0;
@@ -207,9 +207,9 @@ t_matrice		*init_matrice(t_env env, t_state state)
 
 	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
 		return (NULL);
-	matrice->rot_x = init_rot_x(env);
-	matrice->rot_y = init_rot_y(env);
-	matrice->rot_z = init_rot_z(env);
+	// matrice->rot_x = init_rot_x(env);
+	// matrice->rot_y = init_rot_y(env);
+	// matrice->rot_z = init_rot_z(env);
 	matrice->model = init_identity();
 	matrice->view = init_view(state.cam_pos, vec3_add(state.cam_pos,\
 		state.cam_front), state.cam_up);

@@ -16,11 +16,6 @@ void	draw(t_env env, t_obj obj, t_matrice matrice)
 {
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-				// update position et zoom;
-
-			// *state = update_state(*env, *state);
-			// matrice->view = init_view(state->cam_pos, vec3_add(state->cam_pos,\
-			// 	state->cam_front), state->cam_up);
 	glUseProgram(env.program_id);	
 	init_mvp(env, matrice);
 	glDrawArrays(GL_TRIANGLES, 0, obj.vertices_final.len);

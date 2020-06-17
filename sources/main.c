@@ -81,6 +81,8 @@ int		main(int ac, char **av)
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
+			*state = update_orientation(*state, *env);
+			matrice->model = mat_mat(matrice->model, init_rot_x(state->angle_x));
 			matrice->model = update_model(matrice->model, *env);
 			draw(*env, *obj, *matrice);
 		}
