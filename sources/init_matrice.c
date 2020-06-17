@@ -200,11 +200,11 @@ static t_mat4	init_projection()
 	return (projection);
 }
 
-t_matrice		*init_matrice()
+t_mvp		*init_matrice()
 {
-	t_matrice	*matrice;
+	t_mvp	*matrice;
 
-	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
+	if (!(matrice = (t_mvp*)malloc(sizeof(t_mvp))))
 		return (NULL);
 	matrice->model = init_identity();
 	matrice->view = init_view(vec3_new(0, 0, 3), vec3_add(vec3_new(0, 0, 3),\
@@ -213,7 +213,7 @@ t_matrice		*init_matrice()
 	return (matrice);
 }
 
-void			init_mvp(t_env env, t_matrice matrice)
+void			init_mvp(t_env env, t_mvp matrice)
 {
 	glUniformMatrix4fv(env.model_id, 1, GL_FALSE, (const GLfloat*)&matrice.model);
 	glUniformMatrix4fv(env.view_id, 1, GL_FALSE, (const GLfloat*)&matrice.view);

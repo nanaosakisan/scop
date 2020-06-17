@@ -12,7 +12,7 @@
 
 #include <ft_scop.h>
 
-void	clean(t_env *env, t_obj *obj, t_matrice *matrice)
+void	clean(t_env *env, t_obj *obj, t_mvp *matrice)
 {
 	glDeleteVertexArrays(1, &obj->vao);
 	glDeleteBuffers(1, &obj->vbo);
@@ -50,8 +50,7 @@ int		main(int ac, char **av)
 {
 	t_env		*env;
 	t_obj		*obj;
-	t_matrice	*matrice;
-	t_state		*state;
+	t_mvp		*matrice;
 
 	if (ac == 2 && av[1])
 	{

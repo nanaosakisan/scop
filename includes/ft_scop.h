@@ -90,17 +90,16 @@ typedef	struct	s_state
 {
 	float	angle_x;
 	float	angle_y;
-	float	fov;
 	t_vec3	scale;
+	t_vec3	translation;
 }				t_state;
 
-typedef	struct	s_matrice
+typedef	struct	s_mvp
 {
-	t_mat4	scale;
 	t_mat4	model;
 	t_mat4	view;
 	t_mat4	projection;
-}				t_matrice;
+}				t_mvp;
 
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
@@ -112,16 +111,16 @@ t_array			vertice_to_final(t_array vertices, t_array indices);
 void			get_error();
 void			error_callback(const char *error, const char *description);
 
-void			draw(t_env env, t_obj triangle, t_matrice matrice);
+void			draw(t_env env, t_obj triangle, t_mvp matrice);
 
-t_matrice		*init_matrice();
+t_mvp			*init_matrice();
 t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
-void			init_mvp(t_env env, t_matrice matrice);
+void			init_mvp(t_env env, t_mvp matrice);
 t_mat4			init_scale(t_vec3 vec);
 t_mat4			init_rot_x(float angle_x);
 t_mat4			init_rot_y(float angle_y);
 
-t_array			transformation(t_array vertices_final, t_matrice matrice);
+t_array			transformation(t_array vertices_final, t_mvp matrice);
 t_state			update_state(t_env env, t_state state);
 t_mat4			update_translation(t_mat4 translation, t_env env);
 t_mat4			update_model(t_mat4 model, t_env env);

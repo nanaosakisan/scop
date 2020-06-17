@@ -12,7 +12,7 @@
 
 #include <ft_scop.h>
 
-void	draw(t_env env, t_obj obj, t_matrice matrice)
+void	draw(t_env env, t_obj obj, t_mvp matrice)
 {
 	t_state *state;
 
