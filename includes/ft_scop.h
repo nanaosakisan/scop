@@ -91,6 +91,7 @@ typedef	struct	s_state
 	float	angle_x;
 	float	angle_y;
 	float	fov;
+	t_vec3	scale;
 }				t_state;
 
 typedef	struct	s_matrice
@@ -116,12 +117,13 @@ void			draw(t_env env, t_obj triangle, t_matrice matrice);
 t_matrice		*init_matrice();
 t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
 void			init_mvp(t_env env, t_matrice matrice);
+t_mat4			init_scale(t_vec3 vec);
 t_mat4			init_rot_x(float angle_x);
 t_mat4			init_rot_y(float angle_y);
 
 t_array			transformation(t_array vertices_final, t_matrice matrice);
+t_state			update_state(t_env env, t_state state);
 t_mat4			update_translation(t_mat4 translation, t_env env);
-t_state			update_orientation(t_state state, t_env env);
 t_mat4			update_model(t_mat4 model, t_env env);
 
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);

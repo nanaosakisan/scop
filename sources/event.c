@@ -24,10 +24,12 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	t_state *state;
 
 	state = get_state();
-	state->fov += 0.1 * yoffset;
+	state->scale.x += 0.1 * yoffset;
+	state->scale.y += 0.1 * yoffset;
+	state->scale.z += 0.1 * yoffset;
 }
 
-t_state		update_orientation(t_state state, t_env env)
+static t_state		update_orientation(t_state state, t_env env)
 {
 	double	pos_x;
 	double	pos_y;
@@ -60,4 +62,11 @@ t_mat4		update_model(t_mat4 model, t_env env)
 	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
 		model.x4 += 0.01;
 	return (model);
+}
+
+t_state		update_state(t_env env, t_state state)
+{
+	glfwSetScrollCallback(env.window, scroll_callback);
+	state = update_orientation(state, env);
+	return (state);
 }

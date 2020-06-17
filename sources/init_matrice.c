@@ -35,7 +35,6 @@ static t_mat4	init_identity()
 	return (identity);
 }
 
-
 static t_mat4	init_translation(t_vec3 trans)
 {
 	t_mat4 translation;
@@ -103,6 +102,29 @@ t_mat4	init_rot_y(float angle_y)
 	rot_y.z4 = 0;
 	rot_y.w4 = 1;
 	return (rot_y);
+}
+
+t_mat4			init_scale(t_vec3 vec)
+{
+	t_mat4	scale;
+
+	scale.x1 = vec.x;
+	scale.y1 = 0.0;
+	scale.z1 = 0.0;
+	scale.w1 = 0.0;
+	scale.x2 = 0.0;
+	scale.y2 = vec.y;
+	scale.z2 = 0.0;
+	scale.w2 = 0.0;
+	scale.x3 = 0.0;
+	scale.y3 = 0.0;
+	scale.z3 = vec.z;
+	scale.w3 = 0.0;
+	scale.x4 = 0.0;
+	scale.y4 = 0.0;
+	scale.z4 = 0.0;
+	scale.w4 = 1;
+	return (scale);
 }
 
 static t_mat4	init_rot(t_vec3 right, t_vec3 up, t_vec3 dir)

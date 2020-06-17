@@ -138,14 +138,11 @@ t_state		*get_state()
 	static t_state *state = NULL;
 
 	if (state == NULL)
-		state = (t_state *)malloc(sizeof(t_state));	
-	return (state);
-}
-
-t_state		*init_state(t_state *state)
-{
-	state = get_state();
-	state->angle_x = 0;
-	state->angle_y = 0;
+	{
+		state = (t_state *)malloc(sizeof(t_state));
+		state->angle_x = 0;
+		state->angle_y = 0;
+		state->scale = vec3_new(1, 1, 1);
+	}
 	return (state);
 }
