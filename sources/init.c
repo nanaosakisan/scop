@@ -133,16 +133,14 @@ t_env	*init()
 	return (env);
 }
 
-t_state		*init_state()
+t_state		*init_state(t_state *state)
 {
-	t_state	*state;
-
-	state = (t_state *)malloc(sizeof(t_state));
-	state->cam_pos = vec3_new(0, 0, 3);
-	state->cam_front = vec3_new(0, 0, -1);
-	state->cam_up = vec3_new(0, 1, 0);
-	state->angle_x = 0;
-	state->angle_y = 0;
-	state->angle_z = 0;
+	if (state == NULL)
+	{
+		printf("buh\n");
+		state = (t_state *)malloc(sizeof(t_state));
+		state->angle_x = 0;
+		state->angle_y = 0;
+	}
 	return (state);
 }

@@ -46,19 +46,6 @@ void	get_error()
 	}
 }
 
-static t_mat4	update_model(t_mat4 model, t_env env)
-{
-	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		model.y4 += 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		model.y4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		model.x4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		model.x4 += 0.01;
-	return (model);
-}
-
 int		main(int ac, char **av)
 {
 	t_env		*env;
@@ -70,8 +57,8 @@ int		main(int ac, char **av)
 	{
 		env = init();
 		obj = parsing(av[1]);
-		state = init_state();
-		matrice = init_matrice(*env, *state);
+		// state = init_state();
+		matrice = init_matrice(*env);
 		env->program_id = load_shaders();
 		env->model_id = glGetUniformLocation(env->program_id, "model");
 		env->view_id = glGetUniformLocation(env->program_id, "view");
@@ -81,9 +68,8 @@ int		main(int ac, char **av)
 		while (!glfwWindowShouldClose(env->window) 
 			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 		{
-			*state = update_orientation(*state, *env);
-			matrice->model = mat_mat(matrice->model, init_rot_x(state->angle_x));
-			matrice->model = update_model(matrice->model, *env);
+			// *state = update_orientation(*state, *env);
+	
 			draw(*env, *obj, *matrice);
 		}
 		clean(env, obj, matrice);

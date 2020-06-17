@@ -28,22 +28,28 @@ t_state		update_orientation(t_state state, t_env env)
 	int		height;
 	int		mousse_speed;
 
-	// d_time = 0.01;
-	// mousse_speed = 3;
-	// glfwSetInputMode(env.window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	// glfwGetCursorPos(env.window, &pos_x, &pos_y);
-	// glfwGetWindowSize(env.window, &width, &height);
-	// glfwSetCursorPos(env.window, width / 2, height / 2);
-	// if (glfwGetMouseButton(env.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
-	// {
-	// 	state.angle_x = mousse_speed * d_time * (width / 2 - pos_x);
-	// 	state.angle_y = mousse_speed * d_time * (height / 2 - pos_y);
-	// }
-
-	if (glfwGetKey(env.window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-		state.angle_x += 0.1;
-	if (glfwGetKey(env.window, GLFW_KEY_LEFT) == GLFW_PRESS)
-		state.angle_x -= 0.1;
-	// printf("angle_x: %f")
+	d_time = 0.01;
+	mousse_speed = 3;
+	glfwSetInputMode(env.window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwGetCursorPos(env.window, &pos_x, &pos_y);
+	glfwGetWindowSize(env.window, &width, &height);
+	if (glfwGetMouseButton(env.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		state.angle_x = mousse_speed * d_time * (width / 2 - pos_x);
+		state.angle_y = mousse_speed * d_time * (height / 2 - pos_y);
+	}
 	return (state);
+}
+
+t_mat4		update_model(t_mat4 model, t_env env)
+{
+	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
+		model.y4 += 0.01;
+	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
+		model.y4 -= 0.01;
+	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
+		model.x4 -= 0.01;
+	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
+		model.x4 += 0.01;
+	return (model);
 }

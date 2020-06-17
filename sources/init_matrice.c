@@ -82,7 +82,7 @@ t_mat4	init_rot_x(float angle_x)
 	return (rot_x);
 }
 
-static	t_mat4	init_rot_y(float angle_y)
+t_mat4	init_rot_y(float angle_y)
 {
 	t_mat4 rot_y;
 
@@ -201,18 +201,15 @@ static t_mat4	init_projection()
 	return (projection);
 }
 
-t_matrice		*init_matrice(t_env env, t_state state)
+t_matrice		*init_matrice(t_env env)
 {
 	t_matrice	*matrice;
 
 	if (!(matrice = (t_matrice*)malloc(sizeof(t_matrice))))
 		return (NULL);
-	// matrice->rot_x = init_rot_x(env);
-	// matrice->rot_y = init_rot_y(env);
-	// matrice->rot_z = init_rot_z(env);
 	matrice->model = init_identity();
-	matrice->view = init_view(state.cam_pos, vec3_add(state.cam_pos,\
-		state.cam_front), state.cam_up);
+	matrice->view = init_view(vec3_new(0, 0, 3), vec3_add(vec3_new(0, 0, 3),\
+		vec3_new(0, 0, -1)), vec3_new(0, 1, 0));
 	matrice->projection = init_projection();
 	return (matrice);
 }
