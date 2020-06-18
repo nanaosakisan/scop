@@ -35,7 +35,7 @@ static t_mat4	init_identity()
 	return (identity);
 }
 
-static t_mat4	init_translation(t_vec3 trans)
+t_mat4	init_translation(t_vec3 trans)
 {
 	t_mat4 translation;
 
@@ -54,6 +54,29 @@ static t_mat4	init_translation(t_vec3 trans)
 	translation.x4 = 0;
 	translation.y4 = 0;
 	translation.z4 = 0;
+	translation.w4 = 1;
+	return (translation);
+}
+
+t_mat4	init_translation_inv(t_vec3 trans)
+{
+	t_mat4 translation;
+
+	translation.x1 = 1;
+	translation.y1 = 0;
+	translation.z1 = 0;
+	translation.w1 = 0;
+	translation.x2 = 0;
+	translation.y2 = 1;
+	translation.z2 = 0;
+	translation.w2 = 0;
+	translation.x3 = 0;
+	translation.y3 = 0;
+	translation.z3 = 1;
+	translation.w3 = 0;
+	translation.x4 = -trans.x;
+	translation.y4 = -trans.y;
+	translation.z4 = -trans.z;
 	translation.w4 = 1;
 	return (translation);
 }

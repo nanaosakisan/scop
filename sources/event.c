@@ -51,6 +51,20 @@ static t_state		update_orientation(t_state state, t_env env)
 	return (state);
 }
 
+t_state		update_translation(t_state state, t_env env)
+{
+	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
+		state.translation.y += 0.01;
+	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
+		state.translation.y -= 0.01;
+	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
+		state.translation.x -= 0.01;
+	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
+		state.translation.x += 0.01;
+	// print_vec3(state.translation);
+	return (state);
+}
+
 t_mat4		update_model(t_mat4 model, t_env env)
 {
 	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
@@ -68,5 +82,6 @@ t_state		update_state(t_env env, t_state state)
 {
 	glfwSetScrollCallback(env.window, scroll_callback);
 	state = update_orientation(state, env);
+	state = update_translation(state, env);
 	return (state);
 }

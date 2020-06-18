@@ -119,10 +119,12 @@ void			init_mvp(t_env env, t_mvp matrice);
 t_mat4			init_scale(t_vec3 vec);
 t_mat4			init_rot_x(float angle_x);
 t_mat4			init_rot_y(float angle_y);
+t_mat4			init_translation(t_vec3 trans);
+t_mat4			init_translation_inv(t_vec3 trans);
 
 t_array			transformation(t_array vertices_final, t_mvp matrice);
 t_state			update_state(t_env env, t_state state);
-t_mat4			update_translation(t_mat4 translation, t_env env);
+t_state			update_translation(t_state state, t_env env);
 t_mat4			update_model(t_mat4 model, t_env env);
 
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
