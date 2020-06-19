@@ -26,8 +26,6 @@ void	draw(t_env env, t_obj obj, t_mvp matrice)
 	matrice.model = mat_mat(matrice.model, init_rot_x(state->angle_y));
 	matrice.model = mat_mat(matrice.model, init_rot_y(state->angle_x));
 	matrice.model = mat_mat(init_translation_inv(state->translation), matrice.model);
-	print_mat(matrice.model);
-	// matrice.model = update_model(matrice.model, env);
 	init_mvp(env, matrice);
 	glDrawArrays(GL_TRIANGLES, 0, obj.vertices_final.len);
 	glfwSwapBuffers(env.window);

@@ -61,7 +61,6 @@ t_state		update_translation(t_state state, t_env env)
 		state.translation.x -= 0.01;
 	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
 		state.translation.x += 0.01;
-	// print_vec3(state.translation);
 	return (state);
 }
 

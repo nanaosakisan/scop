@@ -12,26 +12,26 @@
 
 #include <ft_scop.h>
 
-static t_mat4	init_identity()
+static t_mat4	init_identity(t_vec4 vec)
 {
 	t_mat4 identity;
 
-	identity.x1 = 1;
+	identity.x1 = vec.x;
 	identity.y1 = 0;
 	identity.z1 = 0;
 	identity.w1 = 0;
 	identity.x2 = 0;
-	identity.y2 = 1;
+	identity.y2 = vec.y;
 	identity.z2 = 0;
 	identity.w2 = 0;
 	identity.x3 = 0;
 	identity.y3 = 0;
-	identity.z3 = 1;
+	identity.z3 = vec.z;
 	identity.w3 = 0;
 	identity.x4 = 0;
 	identity.y4 = 0;
 	identity.z4 = 0;
-	identity.w4 = 1;
+	identity.w4 = vec.w;
 	return (identity);
 }
 
@@ -229,7 +229,7 @@ t_mvp		*init_matrice()
 
 	if (!(matrice = (t_mvp*)malloc(sizeof(t_mvp))))
 		return (NULL);
-	matrice->model = init_identity();
+	matrice->model = init_identity(vec4_new(1, 1, 1, 1));
 	matrice->view = init_view(vec3_new(0, 0, 3), vec3_add(vec3_new(0, 0, 3),\
 		vec3_new(0, 0, -1)), vec3_new(0, 1, 0));
 	matrice->projection = init_projection();
