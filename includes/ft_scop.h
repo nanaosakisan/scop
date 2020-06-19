@@ -90,7 +90,7 @@ typedef	struct	s_state
 {
 	float	angle_x;
 	float	angle_y;
-	t_vec3	scale;
+	t_vec4	scale;
 	t_vec3	translation;
 }				t_state;
 
@@ -114,9 +114,9 @@ void			error_callback(const char *error, const char *description);
 void			draw(t_env env, t_obj triangle, t_mvp matrice);
 
 t_mvp			*init_matrice();
+t_mat4			init_identity(t_vec4 vec);
 t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
 void			init_mvp(t_env env, t_mvp matrice);
-t_mat4			init_scale(t_vec3 vec);
 t_mat4			init_rot_x(float angle_x);
 t_mat4			init_rot_y(float angle_y);
 t_mat4			init_translation(t_vec3 trans);

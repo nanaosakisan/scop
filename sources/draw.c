@@ -22,7 +22,7 @@ void	draw(t_env env, t_obj obj, t_mvp matrice)
 	glUseProgram(env.program_id);
 	state = get_state();
 	*state = update_state(env, *state);
-	matrice.model = mat_mat(matrice.model, init_scale(state->scale));
+	matrice.model = mat_mat(matrice.model, init_identity(state->scale));
 	matrice.model = mat_mat(matrice.model, init_rot_x(state->angle_y));
 	matrice.model = mat_mat(matrice.model, init_rot_y(state->angle_x));
 	matrice.model = mat_mat(init_translation_inv(state->translation), matrice.model);
