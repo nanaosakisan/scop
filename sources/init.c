@@ -101,15 +101,20 @@ t_obj	*init_obj(t_obj *obj)
 	return (obj);
 }
 
+t_env	*ft_get_env()
+{
+	static t_env *env;
+
+	if (env == NULL)
+		env = (t_env*)malloc(sizeof(t_env));
+	return (env);
+}
+
 t_env	*init()
 {
 	t_env	*env;
 
-	if (!(env = (t_env*)malloc(sizeof(env))))
-	{
-		error_callback("MALLOC", "environment's malloc failed.");
-		return (NULL);
-	}
+	env = ft_get_env();
 	if (!glfwInit())
 	{
 		error_callback("GLFW", "Failed to initialize GLFW");
@@ -130,6 +135,7 @@ t_env	*init()
 	glfwSetFramebufferSizeCallback(env->window, framebuffer_size_callback);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetKeyCallback(env->window, key_callback);
 	return (env);
 }
 

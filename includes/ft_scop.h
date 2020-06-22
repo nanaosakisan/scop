@@ -101,6 +101,9 @@ typedef	struct	s_mvp
 	t_mat4	projection;
 }				t_mvp;
 
+t_env			*ft_get_env();
+void 			key_callback(GLFWwindow* window, int key, int scancode,\
+				int action, int mods);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
 t_state			*get_state();

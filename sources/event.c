@@ -12,17 +12,29 @@
 
 #include <ft_scop.h>
 
-// void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-// {
-//     if (key == GLFW_KEY_W || key == GLFW_KEY_S || key == GLFW_KEY_A
-// 		|| key == GLFW_KEY_D && action == GLFW_PRESS)
-//         update_translation();
-// }
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	t_env	*env;
+
+	(void)window;
+	(void)scancode;
+	(void)mods;
+	env = ft_get_env();
+	if (key == GLFW_KEY_ESCAPE)
+		exit(EXIT_SUCCESS);
+	if (action == GLFW_PRESS)
+		env->keys[key] = 1;
+	if (action == GLFW_RELEASE)
+		env->keys[key] = 1;
+
+}
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	t_state *state;
 
+	(void)window;
+	(void)xoffset;
 	state = get_state();
 	state->scale.x += 0.1 * yoffset;
 	state->scale.y += 0.1 * yoffset;
