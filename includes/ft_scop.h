@@ -20,7 +20,7 @@
 # else
 #  include <glad/glad.h>
 # endif
-# include <GLFW/glfw3.h>
+# include <GLFW/glfw3.h> 
 
 # ifdef __APPLE__
 #  define GLADloadproc void*
@@ -101,12 +101,9 @@ typedef	struct	s_mvp
 	t_mat4	projection;
 }				t_mvp;
 
+t_env			*init_env();
 t_env			*ft_get_env();
-void 			key_callback(GLFWwindow* window, int key, int scancode,\
-				int action, int mods);
-void			scroll_callback(GLFWwindow* window, double xoffset,\
-				double yoffset);
-t_env			*init();
+
 t_obj			*init_obj(t_obj *obj);
 t_state			*get_state();
 GLuint			load_shaders();
@@ -116,19 +113,20 @@ t_array			vertice_to_final(t_array vertices, t_array indices);
 void			get_error();
 void			error_callback(const char *error, const char *description);
 
-void			draw(t_env env, t_obj triangle, t_mvp matrice);
-
 t_mvp			*init_matrice();
 t_mat4			init_identity(t_vec4 vec);
 t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
-void			init_mvp(t_env env, t_mvp matrice);
 t_mat4			init_rot_x(float angle_x);
 t_mat4			init_rot_y(float angle_y);
-t_mat4			init_translation(t_vec3 trans);
 t_mat4			init_translation_inv(t_vec3 trans);
 
+void 			key_callback(GLFWwindow* window, int key, int scancode,\
+				int action, int mods);
+void			scroll_callback(GLFWwindow* window, double xoffset,\
+				double yoffset);
 t_state			update_state(t_env env, t_state state);
-t_state			update_translation(t_state state, t_env env);
+
+void			draw(t_env env, t_obj triangle, t_mvp matrice);
 
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_mat4			mat_mat(t_mat4 m1, t_mat4 m2);

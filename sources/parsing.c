@@ -12,7 +12,7 @@
 
 #include <ft_scop.h>
 
-static void	parse_vertice(char **split, t_array *vertices)
+static void		parse_vertice(char **split, t_array *vertices)
 {
 	int		i;
 	t_vec4	push;
@@ -21,7 +21,7 @@ static void	parse_vertice(char **split, t_array *vertices)
 	while (split[i])
 		i++;
 	if (i != 4)
-		return;
+		return ;
 	i = 1;
 	if (split[i])
 	{
@@ -33,7 +33,7 @@ static void	parse_vertice(char **split, t_array *vertices)
 	}
 }
 
-static void	triangulate(char **str, int end, t_array *indices)
+static void		triangulate(char **str, int end, t_array *indices)
 {
 	int			start;
 	int			push;
@@ -51,7 +51,7 @@ static void	triangulate(char **str, int end, t_array *indices)
 	}
 }
 
-static void	parse_indice(char **split, t_array *indices)
+static void		parse_indice(char **split, t_array *indices)
 {
 	int			i;
 	int			push;

@@ -51,19 +51,12 @@ int		main(int ac, char **av)
 	if (ac == 2 && av[1])
 	{
 		obj = parsing(av[1]);
-		env = init();
+		env = init_env();
 		matrice = init_matrice();
-		env->program_id = load_shaders();
-		env->model_id = glGetUniformLocation(env->program_id, "model");
-		env->view_id = glGetUniformLocation(env->program_id, "view");
-		env->projection_id = glGetUniformLocation(env->program_id, "projection");
 		get_error();
 		obj = init_obj(obj);
 		while (!glfwWindowShouldClose(env->window))
-		{
 			draw(*env, *obj, *matrice);
-		}
-		printf("buh\n");
 		clean(env, obj, matrice);
 	}
 	else

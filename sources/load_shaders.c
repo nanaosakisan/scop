@@ -50,7 +50,7 @@ static int		check_shader_compilation(GLuint shader_id)
 	glGetShaderiv(shader_id, GL_COMPILE_STATUS, &compil_res);
 	log = NULL;
 	log = 0;
-	if(compil_res != GL_TRUE)
+	if (compil_res != GL_TRUE)
 	{
 		glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &logsize);
 		if (!(log = ft_strnew(logsize)))
@@ -69,16 +69,16 @@ static int		check_shader_compilation(GLuint shader_id)
 	return (1);
 }
 
-static char    *load_source(char *filename)
+static char		*load_source(char *filename)
 {
-	int         fd;
-	struct stat st;
-	char        *source;
-	int         ret;
+	int			fd;
+	struct stat	st;
+	char		*source;
+	int			ret;
 
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		error_callback("FD", "cannot open vertex shader.");
-	if (stat(filename , &st) == -1) 
+	if (stat(filename, &st) == -1)
 		error_callback("STAT", "cannot read stat.");
 	if (!(source = ft_strnew(st.st_size)))
 		error_callback("MALLOC", "source's malloc failed.");
@@ -88,15 +88,15 @@ static char    *load_source(char *filename)
 	return (source);
 }
 
-static GLuint   create_shader(GLenum shader, char *source)
+static GLuint	create_shader(GLenum shader, char *source)
 {
-	GLuint      shader_id;
+	GLuint	shader_id;
 
 	shader_id = 0;
 	shader_id = glCreateShader(shader);
 	if (shader_id == 0)
 		error_callback("SHADER", "cannot create shader id.");
-	glShaderSource(shader_id, 1, (const GLchar *const *)&source , NULL);
+	glShaderSource(shader_id, 1, (const GLchar *const *)&source, NULL);
 	glCompileShader(shader_id);
 	ft_strdel(&source);
 	if (check_shader_compilation(shader_id) == -1)
@@ -104,13 +104,13 @@ static GLuint   create_shader(GLenum shader, char *source)
 	return (shader_id);
 }
 
-GLuint          load_shaders()
+GLuint			load_shaders(void)
 {
-	GLuint      vertex_id;
-	GLuint      fragment_id;
-	char        *vertex_source;
-	char        *fragment_source;
-	GLuint      program_id;
+	GLuint		vertex_id;
+	GLuint		fragment_id;
+	char		*vertex_source;
+	char		*fragment_source;
+	GLuint		program_id;
 
 	vertex_source = load_source("./shaders/vertex_shader.glsl");
 	fragment_source = load_source("./shaders/fragment_shader.glsl");
@@ -128,5 +128,5 @@ GLuint          load_shaders()
 		return (0);
 	glDetachShader(program_id, fragment_id);
 	glDeleteShader(fragment_id);
-	return program_id;
+	return (program_id);
 }

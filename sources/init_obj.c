@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_obj.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iporsenn <iporsenn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iporsenn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 15:00:38 by iporsenn          #+#    #+#             */
-/*   Updated: 2020/05/09 15:09:34 by iporsenn         ###   ########.fr       */
+/*   Created: 2020/06/22 16:01:21 by iporsenn          #+#    #+#             */
+/*   Updated: 2020/06/22 16:01:23 by iporsenn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_scop.h>
-
-
-void	framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that
-	// width and height will be significantly larger than specified on retina
-	// displays.
-	if (!window)
-		return ;
-	glViewport(0, 0, width, height);
-}
 
 t_obj	*init_obj(t_obj *obj)
 {
@@ -94,64 +83,5 @@ t_obj	*init_obj(t_obj *obj)
 		0,                                // stride
 		(void*)0                          // array buffer offset
 	);
-	// Enable depth test
-	glEnable(GL_DEPTH_TEST);
-	// Accept fragment if it closer to the camera than the former one
-	glDepthFunc(GL_LESS);
 	return (obj);
-}
-
-t_env	*ft_get_env()
-{
-	static t_env *env;
-
-	if (env == NULL)
-		env = (t_env*)malloc(sizeof(t_env));
-	return (env);
-}
-
-t_env	*init()
-{
-	t_env	*env;
-
-	env = ft_get_env();
-	if (!glfwInit())
-	{
-		error_callback("GLFW", "Failed to initialize GLFW");
-		return (NULL);
-	}
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	env->window = glfwCreateWindow(HEIGHT, WIDTH, "ft_scop", NULL, NULL);
-	if (!env->window)
-	{
-		error_callback("WINDOW", "Failed to open window");
-		glfwTerminate();
-		return (NULL);
-	}
-	glfwMakeContextCurrent(env->window);
-	glfwSetFramebufferSizeCallback(env->window, framebuffer_size_callback);
-	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
-	ft_bzero(env->keys, 348);
-	glfwSetKeyCallback(env->window, key_callback);
-	glfwSetScrollCallback(env->window, scroll_callback);
-	return (env);
-}
-
-t_state		*get_state()
-{
-	static t_state *state = NULL;
-
-	if (state == NULL)
-	{
-		state = (t_state *)malloc(sizeof(t_state));
-		state->angle_x = 0;
-		state->angle_y = 0;
-		state->scale = vec4_new(1, 1, 1, 1);
-		state->translation = vec3_new(0, 0, 0);
-	}
-	return (state);
 }

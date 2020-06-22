@@ -12,7 +12,8 @@
 
 #include <ft_scop.h>
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void	key_callback(GLFWwindow *window, int key, int scancode, int action,\
+int mods)
 {
 	t_env	*env;
 
@@ -28,7 +29,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		env->keys[key] = 0;
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+void	scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
 	t_state *state;
 
@@ -40,10 +41,9 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	state->scale.z += 0.1 * yoffset;
 }
 
-t_state		update_state(t_env env, t_state state)
+t_state	update_state(t_env env, t_state state)
 {
-	double	pos_x;
-	double	pos_y;
+	double	pos[2];
 	float	d_time;
 	int		width;
 	int		height;
@@ -52,12 +52,12 @@ t_state		update_state(t_env env, t_state state)
 	d_time = 0.01;
 	mousse_speed = 3;
 	glfwSetInputMode(env.window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwGetCursorPos(env.window, &pos_x, &pos_y);
+	glfwGetCursorPos(env.window, &pos[0], &pos[1]);
 	glfwGetWindowSize(env.window, &width, &height);
 	if (glfwGetMouseButton(env.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
-		state.angle_x = mousse_speed * d_time * (width / 2 - pos_x);
-		state.angle_y = mousse_speed * d_time * (height / 2 - pos_y);
+		state.angle_x = mousse_speed * d_time * (width / 2 - pos[0]);
+		state.angle_y = mousse_speed * d_time * (height / 2 - pos[1]);
 	}
 	state.translation.y += env.keys[GLFW_KEY_W] * 0.01 - env.keys[GLFW_KEY_S]\
 		* 0.01;

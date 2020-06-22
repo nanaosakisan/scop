@@ -20,7 +20,7 @@ SRC_NAME =	vec_new.c		\
 			vec_dot_gem.c	\
 			vec_normalize.c	\
 			vec_cross.c		\
-			vec_scale.c
+			vec_scale.c		
 
 SRC =  $(addprefix $(SRC_PATH), $(SRC_NAME))
 

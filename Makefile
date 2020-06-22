@@ -25,8 +25,10 @@ LIBGLFW_DIR = $(LIB_GLFW)/src
 LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 
 SRC_NAME =	main.c				\
-			init.c				\
+			init_env.c			\
+			init_obj.c			\
 			init_matrice.c		\
+			init_mvp.c			\
 			draw.c				\
 			load_shaders.c		\
 			parsing.c			\
