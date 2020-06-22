@@ -45,7 +45,7 @@
 #  define M_PI 3.1415926535 
 # endif
 
-# define N_KEY 284
+# define N_KEY 348
 
 typedef struct	s_env
 {
@@ -104,6 +104,8 @@ typedef	struct	s_mvp
 t_env			*ft_get_env();
 void 			key_callback(GLFWwindow* window, int key, int scancode,\
 				int action, int mods);
+void			scroll_callback(GLFWwindow* window, double xoffset,\
+				double yoffset);
 t_env			*init();
 t_obj			*init_obj(t_obj *obj);
 t_state			*get_state();
@@ -127,7 +129,6 @@ t_mat4			init_translation_inv(t_vec3 trans);
 
 t_state			update_state(t_env env, t_state state);
 t_state			update_translation(t_state state, t_env env);
-t_mat4			update_model(t_mat4 model, t_env env);
 
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_mat4			mat_mat(t_mat4 m1, t_mat4 m2);

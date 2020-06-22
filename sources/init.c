@@ -135,7 +135,9 @@ t_env	*init()
 	glfwSetFramebufferSizeCallback(env->window, framebuffer_size_callback);
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
+	ft_bzero(env->keys, 348);
 	glfwSetKeyCallback(env->window, key_callback);
+	glfwSetScrollCallback(env->window, scroll_callback);
 	return (env);
 }
 

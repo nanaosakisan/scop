@@ -25,8 +25,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (action == GLFW_PRESS)
 		env->keys[key] = 1;
 	if (action == GLFW_RELEASE)
-		env->keys[key] = 1;
-
+		env->keys[key] = 0;
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
@@ -41,7 +40,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	state->scale.z += 0.1 * yoffset;
 }
 
-static t_state		update_orientation(t_state state, t_env env)
+t_state		update_state(t_env env, t_state state)
 {
 	double	pos_x;
 	double	pos_y;
@@ -60,39 +59,9 @@ static t_state		update_orientation(t_state state, t_env env)
 		state.angle_x = mousse_speed * d_time * (width / 2 - pos_x);
 		state.angle_y = mousse_speed * d_time * (height / 2 - pos_y);
 	}
-	return (state);
-}
-
-t_state		update_translation(t_state state, t_env env)
-{
-	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		state.translation.y += 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		state.translation.y -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		state.translation.x -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		state.translation.x += 0.01;
-	return (state);
-}
-
-t_mat4		update_model(t_mat4 model, t_env env)
-{
-	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		model.y4 += 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		model.y4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		model.x4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		model.x4 += 0.01;
-	return (model);
-}
-
-t_state		update_state(t_env env, t_state state)
-{
-	glfwSetScrollCallback(env.window, scroll_callback);
-	state = update_orientation(state, env);
-	state = update_translation(state, env);
+	state.translation.y += env.keys[GLFW_KEY_W] * 0.01 - env.keys[GLFW_KEY_S]\
+		* 0.01;
+	state.translation.x += env.keys[GLFW_KEY_D] * 0.01 - env.keys[GLFW_KEY_A]\
+		* 0.01;
 	return (state);
 }
