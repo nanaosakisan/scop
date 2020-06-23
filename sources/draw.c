@@ -30,6 +30,7 @@ void		draw(t_env env, t_obj obj, t_mvp matrice)
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(env.program_id);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	state = get_state();
 	*state = update_state(env, *state);
 	matrice.model = mat_mat(matrice.model, init_identity(state->scale));
