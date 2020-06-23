@@ -12,9 +12,9 @@
 
 #include <ft_scop.h>
 
-t_array vertice_to_final(t_array vertices, t_array indices)
+t_array	vertice_to_final(t_array vertices, t_array indices)
 {
-	int 	i;
+	int		i;
 	t_array	vertices_final;
 	t_vec4	push;
 

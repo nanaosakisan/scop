@@ -27,7 +27,7 @@ LIBGLFW_INC = $(LIB_DIR)/GLFW/include
 SRC_NAME =	main.c				\
 			init_env.c			\
 			init_obj.c			\
-			init_matrice.c		\
+			update_matrice.c	\
 			init_mvp.c			\
 			draw.c				\
 			load_shaders.c		\
@@ -37,7 +37,8 @@ SRC_NAME =	main.c				\
 			event.c				\
 			print.c
 
-INC_NAME = ft_scop.h	\
+INC_NAME =	ft_scop.h	\
+			mat.h
 
 SRC_DIR = sources
 INC_DIR = includes
