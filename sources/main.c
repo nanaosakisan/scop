@@ -17,10 +17,6 @@ void	clean(t_env *env, t_obj *obj, t_mvp *matrice)
 	glDeleteVertexArrays(1, &obj->vao);
 	glDeleteBuffers(1, &obj->vbo);
 	glfwDestroyWindow(env->window);
-	// free(obj->vertices.memory);
-	free(obj->vertices_final.memory);
-	if (obj->indices.allocated != 0)
-		free(obj->indices.memory);
 	free(obj);
 	free(matrice);
 	free(env);
@@ -48,26 +44,19 @@ void	get_error()
 
 int		main(int ac, char **av)
 {
-	t_env		*env;
-	t_obj		*obj;
-	t_mvp		*matrice;
+	static t_env	*env;
+	t_obj			*obj;
+	t_mvp			*matrice;
 
 	if (ac == 2 && av[1])
 	{
-		env = init();
 		obj = parsing(av[1]);
+		env = init_env();
 		matrice = init_matrice();
-		env->program_id = load_shaders();
-		env->model_id = glGetUniformLocation(env->program_id, "model");
-		env->view_id = glGetUniformLocation(env->program_id, "view");
-		env->projection_id = glGetUniformLocation(env->program_id, "projection");
 		get_error();
 		obj = init_obj(obj);
-		while (!glfwWindowShouldClose(env->window) 
-			&& glfwGetKey(env->window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-		{
+		while (!glfwWindowShouldClose(env->window))
 			draw(*env, *obj, *matrice);
-		}
 		clean(env, obj, matrice);
 	}
 	else

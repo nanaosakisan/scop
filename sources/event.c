@@ -12,27 +12,38 @@
 
 #include <ft_scop.h>
 
-// void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-// {
-//     if (key == GLFW_KEY_W || key == GLFW_KEY_S || key == GLFW_KEY_A
-// 		|| key == GLFW_KEY_D && action == GLFW_PRESS)
-//         update_translation();
-// }
+void	key_callback(GLFWwindow *window, int key, int scancode, int action,\
+int mods)
+{
+	t_env	*env;
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+	(void)window;
+	(void)scancode;
+	(void)mods;
+	env = ft_get_env();
+	if (key == GLFW_KEY_ESCAPE)
+		exit(EXIT_SUCCESS);
+	if (action == GLFW_PRESS)
+		env->keys[key] = 1;
+	if (action == GLFW_RELEASE)
+		env->keys[key] = 0;
+}
+
+void	scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
 	t_state *state;
 
+	(void)window;
+	(void)xoffset;
 	state = get_state();
 	state->scale.x += 0.1 * yoffset;
 	state->scale.y += 0.1 * yoffset;
 	state->scale.z += 0.1 * yoffset;
 }
 
-static t_state		update_orientation(t_state state, t_env env)
+t_state	update_state(t_env env, t_state state)
 {
-	double	pos_x;
-	double	pos_y;
+	double	pos[2];
 	float	d_time;
 	int		width;
 	int		height;
@@ -41,46 +52,16 @@ static t_state		update_orientation(t_state state, t_env env)
 	d_time = 0.01;
 	mousse_speed = 3;
 	glfwSetInputMode(env.window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	glfwGetCursorPos(env.window, &pos_x, &pos_y);
+	glfwGetCursorPos(env.window, &pos[0], &pos[1]);
 	glfwGetWindowSize(env.window, &width, &height);
 	if (glfwGetMouseButton(env.window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
-		state.angle_x = mousse_speed * d_time * (width / 2 - pos_x);
-		state.angle_y = mousse_speed * d_time * (height / 2 - pos_y);
+		state.angle_x = mousse_speed * d_time * (width / 2 - pos[0]);
+		state.angle_y = mousse_speed * d_time * (height / 2 - pos[1]);
 	}
-	return (state);
-}
-
-t_state		update_translation(t_state state, t_env env)
-{
-	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		state.translation.y += 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		state.translation.y -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		state.translation.x -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		state.translation.x += 0.01;
-	return (state);
-}
-
-t_mat4		update_model(t_mat4 model, t_env env)
-{
-	if (glfwGetKey(env.window, GLFW_KEY_W) == GLFW_PRESS)
-		model.y4 += 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_S) == GLFW_PRESS)
-		model.y4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_A) == GLFW_PRESS)
-		model.x4 -= 0.01;
-	if (glfwGetKey(env.window, GLFW_KEY_D) == GLFW_PRESS)
-		model.x4 += 0.01;
-	return (model);
-}
-
-t_state		update_state(t_env env, t_state state)
-{
-	glfwSetScrollCallback(env.window, scroll_callback);
-	state = update_orientation(state, env);
-	state = update_translation(state, env);
+	state.translation.y += env.keys[GLFW_KEY_W] * 0.01 - env.keys[GLFW_KEY_S]\
+		* 0.01;
+	state.translation.x += env.keys[GLFW_KEY_D] * 0.01 - env.keys[GLFW_KEY_A]\
+		* 0.01;
 	return (state);
 }
