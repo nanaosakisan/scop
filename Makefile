@@ -29,6 +29,7 @@ SRC_NAME =	main.c				\
 			init_obj.c			\
 			update_matrice.c	\
 			init_mvp.c			\
+			init_mvp_rev.c		\
 			draw.c				\
 			load_shaders.c		\
 			parsing.c			\

@@ -95,7 +95,7 @@ t_array			vertice_to_final(t_array vertices, t_array indices);
 void			get_error();
 void			error_callback(const char *error, const char *description);
 
-t_mvp			*init_matrice();
+t_mvp			*init_matrice(t_env env);
 
 void 			key_callback(GLFWwindow* window, int key, int scancode,\
 				int action, int mods);
@@ -105,7 +105,8 @@ t_state			update_state(t_env env, t_state state);
 
 void			draw(t_env env, t_obj triangle, t_mvp matrice);
 
-
+t_mvp			*init_matrice_rev(t_env env);
+t_mat4			init_view_rev(t_vec3 pos, t_vec3 target, t_vec3 up);
 //A supprimer
 void    print_mat(t_mat4 mat);
 void	print_vec3(t_vec3 vec);

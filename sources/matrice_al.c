@@ -12,7 +12,7 @@
 
 #include <ft_scop.h>
 
-t_vec4		mat_vec(t_mat4 mat, t_vec4 vec)
+t_vec4	mat_vec(t_mat4 mat, t_vec4 vec)
 {
 	t_vec4	res;
 
@@ -24,7 +24,7 @@ t_vec4		mat_vec(t_mat4 mat, t_vec4 vec)
 	return (res);
 }
 
-t_mat4		mat_mat(t_mat4 m1, t_mat4 m2)
+t_mat4	mat_mat(t_mat4 m1, t_mat4 m2)
 {
 	t_mat4	res;
 
@@ -45,4 +45,47 @@ t_mat4		mat_mat(t_mat4 m1, t_mat4 m2)
 	res.z4 = m1.x4 * m2.z1 + m1.y4 * m2.z2 + m1.z4 * m2.z3 + m1.w4 * m2.z4;
 	res.w4 = m1.x4 * m2.w1 + m1.y4 * m2.w2 + m1.z4 * m2.w3 + m1.w4 * m2.w4;
 	return (res);
+}
+
+t_mat4	mat_mat_rev(t_mat4 m1, t_mat4 m2)
+{
+	t_mat4 res;
+
+	res.x1 = m1.x1 * m2.x1 + m1.x2 * m2.y1 + m1.x3 * m2.z1 + m1.x4 * m2.w1;
+	res.x2 = m1.x1 * m2.x2 + m1.x2 * m2.y2 + m1.x3 * m2.z2 + m1.x4 * m2.w2;
+	res.x3 = m1.x1 + m2.x3 + m1.x2 * m2.y3 + m1.x3 * m2.z3 + m1.x4 * m2.w3;
+	res.x4 = m1.x1 * m2.x4 + m1.x2 * m2.y4 + m1.x3 * m2.z4 + m1.x4 * m2.w4;
+	res.y1 = m1.y1 * m2.x1 + m1.y2 * m2.y1 + m1.y3 * m2.z1 + m1.y4 * m2.w1;
+	res.y2 = m1.y1 * m2.x2 + m1.y2 * m2.y2 + m1.y3 * m2.z2 + m1.y4 * m2.w2;
+	res.y3 = m1.y1 + m2.x3 + m1.y2 * m2.y3 + m1.y3 * m2.z3 + m1.y4 * m2.w3;
+	res.y4 = m1.y1 * m2.x4 + m1.y2 * m2.y4 + m1.y3 * m2.z4 + m1.y4 * m2.w4;
+	res.z1 = m1.z1 * m2.x1 + m1.z2 * m2.y1 + m1.z3 * m2.z1 + m1.z4 * m2.w1;
+	res.z2 = m1.z1 * m2.x2 + m1.z2 * m2.y2 + m1.z3 * m2.z2 + m1.z4 * m2.w2;
+	res.z3 = m1.z1 + m2.x3 + m1.z2 * m2.y3 + m1.z3 * m2.z3 + m1.z4 * m2.w3;
+	res.z4 = m1.z1 * m2.x4 + m1.z2 * m2.y4 + m1.z3 * m2.z4 + m1.z4 * m2.w4;
+	res.w1 = m1.w1 * m2.x1 + m1.w2 * m2.y1 + m1.w3 * m2.z1 + m1.w4 * m2.w1;
+	res.w2 = m1.w1 * m2.x2 + m1.w2 * m2.y2 + m1.w3 * m2.z2 + m1.w4 * m2.w2;
+	res.w3 = m1.w1 + m2.x3 + m1.w2 * m2.y3 + m1.w3 * m2.z3 + m1.w4 * m2.w3;
+	res.w4 = m1.w1 * m2.x4 + m1.w2 * m2.y4 + m1.w3 * m2.z4 + m1.w4 * m2.w4;
+	return (res);
+}
+
+t_mat4	mat_reverse(t_mat4 mat)
+{
+	t_mat4	tmp;
+
+	tmp = mat;
+	mat.y1 = tmp.x2;
+	mat.z1 = tmp.x3;
+	mat.w1 = tmp.y4;
+	mat.x2 = tmp.y1;
+	mat.z2 = tmp.y3;
+	mat.w2 = tmp.x4;
+	mat.x3 = tmp.z1;
+	mat.y3 = tmp.z2;
+	mat.w3 = tmp.z4;
+	mat.x4 = tmp.w1;
+	mat.y4 = tmp.w2;
+	mat.z4 = tmp.w3;
+	return (mat);
 }

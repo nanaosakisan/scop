@@ -47,16 +47,30 @@ int		main(int ac, char **av)
 	static t_env	*env;
 	t_obj			*obj;
 	t_mvp			*matrice;
+	t_mat4			test;
 
 	if (ac == 2 && av[1])
 	{
 		obj = parsing(av[1]);
 		env = init_env();
-		matrice = init_matrice();
+		matrice = init_matrice(*env);
 		get_error();
 		obj = init_obj(obj);
 		while (!glfwWindowShouldClose(env->window))
+		{
+			// test = init_view(vec3_new(0, 0, -2), vec3_add(vec3_new(0, 0, 3),\
+			// 	vec3_new(0, 0, -1)), vec3_new(0, 1, 0));
+			// printf("view:\n");
+			// print_mat(test);
+			// test = mat_reverse(test);
+			// printf("view then reverse:\n");
+			// print_mat(test);
+			// test = init_view_rev(vec3_new(0, 0, -2), vec3_add(vec3_new(0, 0, 3),\
+			// 	vec3_new(0, 0, -1)), vec3_new(0, 1, 0));
+			// printf("reverse view:\n");
+			// print_mat(test);
 			draw(*env, *obj, *matrice);
+		}
 		clean(env, obj, matrice);
 	}
 	else
