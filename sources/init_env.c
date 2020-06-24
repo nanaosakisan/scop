@@ -59,7 +59,7 @@ t_env		*init_env(void)
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
 	glfwSetKeyCallback(env->window, key_callback);
-	glfwSetScrollCallback(env->window, scroll_callback);
+	glfwSetScrollCallback(env->window, scroll_callback_cam);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	env->program_id = load_shaders();
@@ -81,6 +81,12 @@ t_state		*get_state(void)
 		state->angle_y = 0;
 		state->scale = vec4_new(1, 1, 1, 1);
 		state->translation = vec3_new(0, 0, 0);
+
+		state->pos = vec3_new(0, 0, 3);
+		state->front = vec3_new(0, 0, -1);
+		state->up = vec3_new(0, 1, 0);
+		state->fov = M_PI / 2;
+		state->first_mouse = 1;
 	}
 	return (state);
 }

@@ -63,5 +63,7 @@ t_state	update_state(t_env env, t_state state)
 		* 0.01;
 	state.translation.x += env.keys[GLFW_KEY_D] * 0.01 - env.keys[GLFW_KEY_A]\
 		* 0.01;
+	state.translation.z += env.keys[GLFW_KEY_Q] * 0.01 - env.keys[GLFW_KEY_E]\
+		* 0.01;
 	return (state);
 }

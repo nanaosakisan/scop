@@ -35,6 +35,7 @@ SRC_NAME =	main.c				\
 			parsing_tool.c		\
 			matrice_al.c		\
 			event.c				\
+			event_cam.c			\
 			print.c
 
 INC_NAME =	ft_scop.h	\

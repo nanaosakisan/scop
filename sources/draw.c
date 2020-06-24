@@ -32,12 +32,19 @@ void		draw(t_env env, t_obj obj, t_mvp matrice)
 	glUseProgram(env.program_id);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	state = get_state();
-	*state = update_state(env, *state);
-	matrice.model = mat_mat(matrice.model, init_identity(state->scale));
-	matrice.model = mat_mat(matrice.model, init_rot_x(state->angle_y));
-	matrice.model = mat_mat(matrice.model, init_rot_y(state->angle_x));
-	matrice.model = mat_mat(init_translation_inv(state->translation),\
-		matrice.model);
+
+	// *state = update_state(env, *state);
+	// matrice.model = mat_mat(matrice.model, init_identity(state->scale));
+	// matrice.model = mat_mat(matrice.model, init_rot_x(state->angle_y));
+	// matrice.model = mat_mat(matrice.model, init_rot_y(state->angle_x));
+	// matrice.model = mat_mat(init_translation_inv(state->translation),\
+	// 	matrice.model);
+
+	*state = update_state_cam(env, *state);
+	matrice.view = init_view(state->pos, vec3_add(state->pos, state->front),\
+		state->up);
+	matrice.projection = init_projection(state->fov, -1, 1000);
+
 	init_mvp(env, matrice);
 	glDrawArrays(GL_TRIANGLES, 0, obj.vertices_final.len);
 	glfwSwapBuffers(env.window);

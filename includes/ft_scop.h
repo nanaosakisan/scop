@@ -74,6 +74,13 @@ typedef	struct	s_state
 	float	angle_y;
 	t_vec4	scale;
 	t_vec3	translation;
+
+	t_vec3	pos;
+	t_vec3	front;
+	t_vec3	up;
+	float	fov;
+	double	last_cursor[2];
+	int		first_mouse;
 }				t_state;
 
 typedef	struct	s_mvp
@@ -102,6 +109,12 @@ void 			key_callback(GLFWwindow* window, int key, int scancode,\
 void			scroll_callback(GLFWwindow* window, double xoffset,\
 				double yoffset);
 t_state			update_state(t_env env, t_state state);
+
+t_state			update_state_cam(t_env env, t_state state);
+t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
+t_mat4			init_projection(float angle, float z_near, float z_far);
+void			scroll_callback_cam(GLFWwindow* window, double xoffset,\
+				double yoffset);
 
 void			draw(t_env env, t_obj triangle, t_mvp matrice);
 
