@@ -81,6 +81,8 @@ typedef	struct	s_state
 	float	fov;
 	double	last_cursor[2];
 	int		first_mouse;
+	float	yaw;
+	float	pitch;
 }				t_state;
 
 typedef	struct	s_mvp
@@ -115,6 +117,8 @@ t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
 t_mat4			init_projection(float angle, float z_near, float z_far);
 void			scroll_callback_cam(GLFWwindow* window, double xoffset,\
 				double yoffset);
+void			mouse_callback(GLFWwindow *window, double xpos, double ypos);
+t_mat4			init_rot_x(float angle_x);
 
 void			draw(t_env env, t_obj triangle, t_mvp matrice);
 

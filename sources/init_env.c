@@ -60,6 +60,7 @@ t_env		*init_env(void)
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
 	glfwSetKeyCallback(env->window, key_callback);
 	glfwSetScrollCallback(env->window, scroll_callback_cam);
+	glfwSetCursorPosCallback(env->window, mouse_callback);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	env->program_id = load_shaders();
@@ -87,6 +88,8 @@ t_state		*get_state(void)
 		state->up = vec3_new(0, 1, 0);
 		state->fov = M_PI / 2;
 		state->first_mouse = 1;
+		state->pitch = M_PI / 2;
+		state->yaw = M_PI / 2;
 	}
 	return (state);
 }
