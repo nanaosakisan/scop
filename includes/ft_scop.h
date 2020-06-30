@@ -40,8 +40,8 @@
 // Remove at the end
 # include <stdio.h>
 
-# define HEIGHT 640
-# define WIDTH 480
+# define HEIGHT 600
+# define WIDTH 800
 
 # ifndef M_PI 
 #  define M_PI 3.1415926535 

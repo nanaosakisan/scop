@@ -46,11 +46,13 @@ typedef	struct	s_mat4
 
 t_vec4			mat_vec(t_mat4 mat, t_vec4 vec);
 t_mat4			mat_mat(t_mat4 m1, t_mat4 m2);
+t_mat4			mat_mat_rev(t_mat4 m1, t_mat4 m2);
 
 t_mat4			init_identity(t_vec4 vec);
 t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up);
-t_mat4			init_rot_x(float angle_x);
-t_mat4			init_rot_y(float angle_y);
+t_mat4			rot_x(float angle_x);
+t_mat4			rot_y(float angle_y);
+t_mat4			rot_z(float angle_y);
 t_mat4			init_translation_inv(t_vec3 trans);
 
 #endif

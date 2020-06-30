@@ -32,6 +32,7 @@ t_mat4		rot_x(float angle)
 	rot.y4 = 0;
 	rot.z4 = 0;
 	rot.w4 = 1;
+	return (rot);
 }
 
 t_mat4		rot_y(float angle)
@@ -54,6 +55,7 @@ t_mat4		rot_y(float angle)
 	rot.y4 = 0;
 	rot.z4 = 0;
 	rot.w4 = 1;
+	return (rot);
 }
 
 t_mat4		rot_z(float angle)
@@ -76,4 +78,5 @@ t_mat4		rot_z(float angle)
 	rot.y4 = 0;
 	rot.z4 = 0;
 	rot.w4 = 1;
+	return (rot);
 }

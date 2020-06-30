@@ -47,7 +47,7 @@ t_env		*init_env(void)
 
 	env = ft_get_env();
 	init_glfw();
-	env->window = glfwCreateWindow(HEIGHT, WIDTH, "ft_scop", NULL, NULL);
+	env->window = glfwCreateWindow(WIDTH, HEIGHT, "ft_scop", NULL, NULL);
 	if (!env->window)
 	{
 		error_callback("WINDOW", "Failed to open window");
@@ -59,7 +59,7 @@ t_env		*init_env(void)
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	glfwSetInputMode(env->window, GLFW_STICKY_KEYS, GL_TRUE);
 	glfwSetKeyCallback(env->window, key_callback);
-	glfwSetScrollCallback(env->window, scroll_callback);
+	// glfwSetScrollCallback(env->window, scroll_callback);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	env->program_id = load_shaders();

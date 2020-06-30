@@ -52,7 +52,7 @@ int		main(int ac, char **av)
 	{
 		obj = parsing(av[1]);
 		env = init_env();
-		matrice = init_matrice();
+		matrice = init_matrice(*env);
 		get_error();
 		obj = init_obj(obj);
 		while (!glfwWindowShouldClose(env->window))
