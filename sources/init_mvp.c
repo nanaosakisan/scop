@@ -75,13 +75,11 @@ t_mat4			init_view(t_vec3 pos, t_vec3 target, t_vec3 up)
 	return (view);
 }
 
-static t_mat4	init_projection(float angle, float z_near, float z_far)
+static t_mat4	init_projection(float angle, float ar, float z_near, float z_far)
 {
 	t_mat4	projection;
-	float	ar;
 	float	denom;
 
-	ar = HEIGHT / WIDTH;
 	denom = z_near - z_far;
 	projection.x1 = 1 / (ar * tan(angle / 2));
 	projection.y1 = 0;
@@ -102,15 +100,18 @@ static t_mat4	init_projection(float angle, float z_near, float z_far)
 	return (projection);
 }
 
-t_mvp			*init_matrice(void)
+t_mvp			*init_matrice(t_env env)
 {
 	t_mvp	*matrice;
+	int		width;
+	int		height;
 
 	if (!(matrice = (t_mvp*)malloc(sizeof(t_mvp))))
 		return (NULL);
 	matrice->model = init_identity(vec4_new(1, 1, 1, 1));
 	matrice->view = init_view(vec3_new(0, 0, 3), vec3_add(vec3_new(0, 0, 3),\
 		vec3_new(0, 0, -1)), vec3_new(0, 1, 0));
-	matrice->projection = init_projection(M_PI / 2, -1, 1000);
+	glfwGetWindowSize(env.window, &width, &height);
+	matrice->projection = init_projection(M_PI / 2, width / height, -1, 1000);
 	return (matrice);
 }

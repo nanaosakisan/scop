@@ -72,7 +72,6 @@ typedef	struct	s_state
 {
 	float	angle_x;
 	float	angle_y;
-	t_vec4	scale;
 	t_vec3	translation;
 }				t_state;
 
@@ -95,7 +94,7 @@ t_array			vertice_to_final(t_array vertices, t_array indices);
 void			get_error();
 void			error_callback(const char *error, const char *description);
 
-t_mvp			*init_matrice();
+t_mvp			*init_matrice(t_env env);
 
 void 			key_callback(GLFWwindow* window, int key, int scancode,\
 				int action, int mods);
@@ -104,7 +103,6 @@ void			scroll_callback(GLFWwindow* window, double xoffset,\
 t_state			update_state(t_env env, t_state state);
 
 void			draw(t_env env, t_obj triangle, t_mvp matrice);
-
 
 //A supprimer
 void    print_mat(t_mat4 mat);

@@ -79,7 +79,6 @@ t_state		*get_state(void)
 		state = (t_state *)malloc(sizeof(t_state));
 		state->angle_x = 0;
 		state->angle_y = 0;
-		state->scale = vec4_new(1, 1, 1, 1);
 		state->translation = vec3_new(0, 0, 0);
 	}
 	return (state);
